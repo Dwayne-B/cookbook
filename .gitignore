@@ -1,3 +1,2 @@
 backend/src/node_modules/
-.txt
-.env
+backend/src/.env/
