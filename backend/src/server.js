@@ -1,15 +1,18 @@
+import cors from 'cors';
+import * as dotenv from 'dotenv';
 import express from "express";
 import mongoose from "mongoose";
 import apiRouter from "./routes/api.js";
-
+if (process.env.NODE_ENV !== "prod") {
+  dotenv.config();
+}
 // serverAPIversion specifies version of API being used
-
-const PORT = 3000 || process.env.PORT
+const PORT = process.env.PORT || 5000
 const app = express();
+app.use(cors());
+const password = process.env.PASS;
+const user = process.env.USER_NAME
 
-const password = "password123!";
-const user = "dbynum"
-const client = null;
 const uri = `mongodb+srv://${user}:${password}@cluster0.ey7myir.mongodb.net/?retryWrites=true&w=majority`;
 // conntect to DB
 
@@ -40,6 +43,19 @@ app.use(express.json());
  * */
 app.use("/api", apiRouter);
 
+
+/*
+**Add error handling middleware for API routes and non api routes
+** []COMPLETE [x]IN PROGRESS 
+*/
+
+
+// express error handler
+import errorHandler from "./error.js";
+app.use((req, res, next) => {
+  console.log("404 erro handling middleware")
+  next(err)
+}, errorHandler);
 
 
 

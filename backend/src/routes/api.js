@@ -13,11 +13,11 @@ router.get("/", getAllCards);
 //GET 
 //user should be able to get ONE saved cards
 // [X]COMPLETE []IN PROGRESS 
-router.get("/getCard/:id", getOneCard);
+router.get("/:id", getOneCard);
 //POST 
 // user should be able to create recipe and add it to DB
 // [X]COMPLETE []IN PROGRESS 
-router.post("/create", createCard);
+router.post("/", createCard);
 //POST 
 // user should be able to delete recipe 
 // [X]COMPLETE []IN PROGRESS 

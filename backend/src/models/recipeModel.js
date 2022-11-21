@@ -3,7 +3,10 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const recipeSchema = new Schema({
-  title: String,
+  title: {
+    type: String,
+    required: true
+  }
 
 });
 

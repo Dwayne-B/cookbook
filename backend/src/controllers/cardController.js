@@ -1,31 +1,42 @@
 
 import Recipe from "../models/recipeModel.js";
 
-const getOneCard = async (req, res,) => {
-  const recipeId = req.params.id
-  const recipies = await Recipe.find({ _id: recipeId });
-  res.json(recipies);
-}
-
-const getAllCards = async (req, res) => {
-  const recipies = await Recipe.find();
-  res.json(recipies);
-}
-const createCard = async (req, res) => {
-  const errorMSG = "there was an error posting your new recipie....her is the error thrown....";
+const getOneCard = async (req, res, next) => {
   try {
-    const newRecipe = new Recipe({
-      title: req.body.title
-    });
-    const json = await newRecipe.save()
-    res.json(json);
-  } catch (error) {
-    console.log(errorMSG + error)
-    res.json(errorMSG + error);
+    const recipeId = req.params.id;
+
+    const recipes = await Recipe.find({ _id: recipeId })
+    console.log(recipes)
+    res.json(recipes);
+  } catch (err) {
+    next(new Error("cannot getOne" + err))
   }
+
+
+};
+
+const getAllCards = async (req, res, next) => {
+  await Recipe.find().then((data) => {
+    console.log(data)
+    res.json(data);
+
+  }).catch(() => {
+    next(err + "Server error")
+  });
+
+
+}
+const createCard = async (req, res, next) => {
+
+  const newRecipe = new Recipe({
+    title: req.body.title
+  });
+  await newRecipe.save().then(data => { console.log(data); res.json(data); }).catch(err => next(err + "  cannot create cards error"))
+
+
 }
 
-const deleteCard = async (req, res) => {
+const deleteCard = async (req, res, next) => {
   // get recipe card id
   const recipeId = req.params.id;
   console.log(recipeId);
@@ -36,7 +47,7 @@ const deleteCard = async (req, res) => {
 }
 
 
-const updateCard = async (req, res) => {
+const updateCard = async (req, res, next) => {
 
   // get recipe card id
   const recipeId = req.params.id;
@@ -46,6 +57,8 @@ const updateCard = async (req, res) => {
   // send the deleted recipe back 
   res.json(recipe);
 }
+
+
 
 
 export {
