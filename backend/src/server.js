@@ -7,7 +7,7 @@ if (process.env.NODE_ENV !== "prod") {
   dotenv.config();
 }
 // serverAPIversion specifies version of API being used
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5231
 const app = express();
 app.use(cors());
 const password = process.env.PASS;
@@ -54,7 +54,7 @@ app.use("/api", apiRouter);
 import errorHandler from "./error.js";
 app.use((req, res, next) => {
   console.log("404 erro handling middleware")
-  next(err)
+  next()
 }, errorHandler);
 
 

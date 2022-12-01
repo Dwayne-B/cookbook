@@ -7,7 +7,7 @@ function NavLinks() {
       <ul className="flex flex-row border sm:justify-end justify-center w-full px-5 py-2">
         <Link to="/" > <li className='mr-5 self-center'>Search Recipie</li></Link>
 
-        <Link to='/full' >
+        <Link to='/SavedCardsPage' >
           <li>
             <img src={img} alt="" />
           </li>

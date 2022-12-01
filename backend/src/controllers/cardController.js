@@ -27,7 +27,7 @@ const getAllCards = async (req, res, next) => {
 
 }
 const createCard = async (req, res, next) => {
-
+  console.log(req.body)
   const newRecipe = new Recipe({
     title: req.body.title
   });

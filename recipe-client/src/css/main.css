@@ -20,12 +20,16 @@ html {
 }
 
 .cnt {
-  border: solid 1px;
-  /* width: 100%;
-  height: 528px; */
+  /* border: solid 1px; */
+  width: 100%;
+  height: 528px;
   background-image: url("../assets/Strip-bg-hero.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 
+}
+
+input {
+  color: black;
 }

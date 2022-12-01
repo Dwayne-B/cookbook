@@ -7,7 +7,7 @@ import NavLinks from '../elements/NavLinks'
 
 function Navigation() {
   return (
-    <div className="flex ">
+    <div>
       <NavLinks />
     </div>
   )
