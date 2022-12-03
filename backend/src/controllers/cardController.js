@@ -16,9 +16,17 @@ const getOneCard = async (req, res, next) => {
 };
 
 const getAllCards = async (req, res, next) => {
+  console.log(res.locals)
   await Recipe.find().then((data) => {
-    console.log(data)
-    res.json(data);
+    // console.log(data)
+    const combinedResponse = {
+      savedCards: data,
+      recipeAPI: res.locals.data
+    }
+
+    console.log("before fE", combinedResponse)
+
+    res.json(combinedResponse);
 
   }).catch(() => {
     next(err + "Server error")

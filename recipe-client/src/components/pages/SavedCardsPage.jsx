@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { json } from 'react-router-dom';
+import Navigation from "../sections/Navigation";
 
 function SavedCardsPage({ x, setData, }) {
   const [input, setInput] = useState("inti")
@@ -88,13 +89,13 @@ function SavedCardsPage({ x, setData, }) {
     }
     else {
       // delete
-      // fetch(`http://localhost:5000/api/deleteCard/${e.target.id}`, {
-      //   method: 'DELETE',
+      fetch(`http://localhost:5000/api/deleteCard/${e.target.id}`, {
+        method: 'DELETE',
 
 
-      // }).then((res) => { res.json(); }).then((data) => {
-      //   setData(x.filter((recipe) => { return recipe._id != e.target.id }))
-      // });
+      }).then((res) => { res.json() }).then((data) => {
+        setData(x.filter((recipe) => { return recipe._id != e.target.id }))
+      });
     }
 
   }
@@ -116,6 +117,7 @@ function SavedCardsPage({ x, setData, }) {
 
   return (
     <div className="h-screen  ">
+      <Navigation />
       <form method="post" required>
         <input value={input} onChange={handleInput} type='text' required name="newCard" id="" />
         <button className="bg-black " type="submit" onClick={handleSubmit}>Create New Recipie</button>
@@ -130,7 +132,7 @@ function SavedCardsPage({ x, setData, }) {
               {currentCard === recipe._id && <input id={recipe._id} type="text" key={i} className=" w-40 border flex justify-between" value={
                 update
               } onChange={handleUpdate} />}
-              <button id={recipe._id} className="bg-blue-700" type='submit' onClick={handle}>{currentCard === recipe._id ? "submit" : "edit"}</button ><button id={recipe._id} className="bg-red-700" type='submit' onClick={handle}>X</button >
+              <button id={recipe._id} className="bg-blue-700" type='submit' onClick={handle}>{currentCard === recipe._id ? "submit" : "edit"}</button ><button id={recipe._id} className="bg-red-700" type='submit' onClick={handle}>Delete</button >
 
             </div>
 
