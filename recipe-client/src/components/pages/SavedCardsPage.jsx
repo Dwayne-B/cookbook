@@ -118,6 +118,7 @@ function SavedCardsPage({ x, setData, }) {
   return (
     <div className="h-screen  ">
       <Navigation />
+
       <form method="post" required>
         <input value={input} onChange={handleInput} type='text' required name="newCard" id="" />
         <button className="bg-black " type="submit" onClick={handleSubmit}>Create New Recipie</button>

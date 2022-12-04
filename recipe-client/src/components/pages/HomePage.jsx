@@ -2,7 +2,7 @@ import React from 'react';
 import CardDisplay from "../sections/CardDisplay";
 import Hero from "../sections/Hero";
 import Navigation from "../sections/Navigation";
-function HomePage({ recipes }) {
+function HomePage({ recipes, setData, x }) {
   console.log(recipes)
   return (
 
@@ -10,8 +10,7 @@ function HomePage({ recipes }) {
 
       <Navigation />
       <Hero />
-      { }
-      <CardDisplay recipes={recipes} />
+      <CardDisplay recipes={recipes} setData={setData} x={x} />
     </div>
   )
 }
