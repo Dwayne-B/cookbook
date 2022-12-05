@@ -47,18 +47,14 @@ app.use(function (req, res, next) {
 /**
  * get recipes from 3rd party API
  */
-app.use('/', async (req, res, next) => {
 
-  console.log("edamam");
+
+app.post('/edamamApi', async (req, res, next) => {
+
+  // console.log(req.body);
   const app_id = "2f7f65d7";
   const app_key = "06c0d1436fd1ffbf3cfc3ebda9042f5a";
-  const options = {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Key': '2a8e34113dmsh3ce3e6dbdec0342p1bc084jsn7ed67fce9440',
-      'X-RapidAPI-Host': 'edamam-recipe-search.p.rapidapi.com'
-    }
-  }
+
   const options2 = {
     method: 'GET',
     headers: {
@@ -70,32 +66,56 @@ app.use('/', async (req, res, next) => {
     compress: true,
     agent: null,
   }
-  var urlTest = 'https://edamam-recipe-search.p.rapidapi.com/search?q=chicken'
-  var url2 = `https://api.edamam.com/api/recipes/v2/?type=public&q=pasta&app_id=${app_id}&app_key=${app_key}`;
-  console.log(url2);
 
-  // const data = await fetch(urlTest, options)
-  //   .then(res => res.json())
-  //   .then(json => {
-  //     console.log(json)
+  var url2 = `https://api.edamam.com/api/recipes/v2/?type=public&q=${req.body.query}&app_id=${app_id}&app_key=${app_key}`;
+  // console.log(url2);
 
-  //     res.json(json)
-  //   })
-  //   .catch(err => console.error('error:' + err));
-  // test
+
   const data = await fetch(url2, options2)
     .then(res => res.json())
     .then(json => {
-      res.locals.data = json.hits
-      // console.log(json.hits)
 
-      next()
+      // console.log('POST', json.hits, "endPOST", json)
+
+      res.json(json.hits);
     })
     .catch(err => console.error('error:' + err));
 
 
 })
+app.use('/', async (req, res, next) => {
 
+  // console.log("edamam");
+  const app_id = "2f7f65d7";
+  const app_key = "06c0d1436fd1ffbf3cfc3ebda9042f5a";
+
+  const options2 = {
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json",
+      "Accept-Encoding": "gzip",
+      "app_id": `${app_id}`
+    }
+    , gzip: true,
+    compress: true,
+    agent: null,
+  }
+
+  var url2 = `https://api.edamam.com/api/recipes/v2/?type=public&q=pasta&app_id=${app_id}&app_key=${app_key}`;
+
+
+  const data = await fetch(url2, options2)
+    .then(res => res.json())
+    .then(json => {
+      res.locals.data = json.hits
+      console.log(json.hits.length)
+
+      next();
+    })
+    .catch(err => console.error('error:' + err));
+
+
+})
 /** 
  * all users can interact with CRUD API
  * this piece of middleware on this specific route allows access to CRUD operations.

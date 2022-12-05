@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { json } from 'react-router-dom';
-import Navigation from "../sections/Navigation";
+
 
 function SavedCardsPage({ x, setData, }) {
   const [input, setInput] = useState("inti")
@@ -108,7 +108,7 @@ function SavedCardsPage({ x, setData, }) {
         headers: {
           "Content-Type": "application/json",
         }
-      }).then(res => res.json()).then(updatedata => { ; setData([...x, updatedata]) })
+      }).then(res => res.json()).then(updatedata => { setData([...x, updatedata]) })
     } else {
 
     }
@@ -116,11 +116,13 @@ function SavedCardsPage({ x, setData, }) {
   }
 
   return (
-    <div className="h-screen  ">
-      <Navigation />
+    <div className="h-screen flex flex-col items-center  mt-14 ">
 
-      <form method="post" required>
-        <input value={input} onChange={handleInput} type='text' required name="newCard" id="" />
+
+      <form className="flex flex-col" method="post" required>
+        <input placeholder="name" value={input} onChange={handleInput} type='text' required name="newCard" id="" />
+        <input placeholder='type of cusine ' />
+        <input placeholder='ingredients' />
         <button className="bg-black " type="submit" onClick={handleSubmit}>Create New Recipie</button>
       </form>
 
@@ -128,11 +130,26 @@ function SavedCardsPage({ x, setData, }) {
         {x ? x.map((recipe, i) => {
 
           return (
-            <div id={recipe._id} >
+            <div className="bg-white text-black" id={recipe._id} >
               {<p>{recipe.title}</p>}
               {currentCard === recipe._id && <input id={recipe._id} type="text" key={i} className=" w-40 border flex justify-between" value={
                 update
               } onChange={handleUpdate} />}
+              <span className={`  p-4  `}>
+                <h4>{'pasta'}</h4>
+
+                <p>Dish type: {"dinner"}</p>
+                <p>ingredients</p>
+                <hr />
+
+                <ul>
+                  <li >pebbles</li>
+                  <li>rocks</li>
+                  <li>Candy and stuff</li>
+
+                </ul>
+
+              </span>
               <button id={recipe._id} className="bg-blue-700" type='submit' onClick={handle}>{currentCard === recipe._id ? "submit" : "edit"}</button ><button id={recipe._id} className="bg-red-700" type='submit' onClick={handle}>Delete</button >
 
             </div>

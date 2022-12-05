@@ -1,9 +1,9 @@
 import React from 'react'
 import Searchbar from "../elements/SearchBar"
-function Hero() {
+function Hero({ setRecipe }) {
   return (
-    <div className="h-28 flex justify-center items-center">
-      <Searchbar />
+    <div className=" cnt flex justify-center items-center">
+      <Searchbar setRecipe={setRecipe} />
 
     </div>
   )

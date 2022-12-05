@@ -1,11 +1,34 @@
-import React from 'react'
+import { useState } from 'react';
 
-function SearchBar() {
+function SearchBar({ setRecipe }) {
+  const [searchQuery, setSearchQuery] = useState()
+  const handleinpt = (e) => {
+    setSearchQuery(e.target.value)
+  }
+  const fetchRecipies = async (e) => {
+    console.log(searchQuery)
+    e.preventDefault();
+    await fetch("http://localhost:5000/edamamApi", {
+      method: "POST",
+      body: JSON.stringify({ query: searchQuery }),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    }).then(res => res.json()).then(data => {
+      console.log("FWETCH DATA", data);
+      setRecipe(data);
+      setSearchQuery('')
+
+
+    })
+
+
+  };
   return (
     <div>
       <form >
-        <input type="text" />
-        <button className="bg-black" type="submit">Search</button>
+        <input value={searchQuery} type="text" onChange={handleinpt} />
+        <button onClick={fetchRecipies} className="bg-black" type="submit">Search</button>
       </form>
     </div>
   )

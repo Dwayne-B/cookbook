@@ -20,29 +20,25 @@ function App() {
         setRecipe(res.recipeAPI)
         setData(res.savedCards)
       }
-      const getRecipe = async () => {
-        const res = await fetch("http://localhost:5000/edamamApi").then(data => data.json()).then(data => {
-          console.log(data.hits)
-
-        })
-        setRecipe(res);
-
-      }
 
       getData();
-      // getRecipe();
+
+
+
+
     } catch (error) {
       console.error(error);
     }
   }, [])
 
   return (
-    <div className='App' >
+    <div className='App ' >
       <BrowserRouter  >
+        <Nav />
 
         <Routes>
 
-          <Route index exact path='/' element={<HomePage recipes={recipes} setData={setData} x={x} />} />
+          <Route index exact path='/' element={<HomePage recipes={recipes} setRecipe={setRecipe} setData={setData} x={x} />} />
           <Route exact path="SavedCardsPage"
             element={<SavedCardsPage x={x} setData={setData} />} />
         </Routes>

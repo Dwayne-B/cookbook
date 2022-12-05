@@ -3,9 +3,9 @@ import { Link } from "react-router-dom"
 import img from "../../assets/Vector.svg"
 function NavLinks() {
   return (
-    <div>
-      <ul className="flex flex-row border sm:justify-end justify-center w-full px-5 py-2">
-        <Link to="/" > <li className='mr-5 self-center'>Search Recipie</li></Link>
+    <div className=" sticky  bg-black z-10 top-0 ">
+      <ul className="px-4 py-2 flex flex-row sm:justify-end justify-center items-center">
+        <Link to="/" > <li className='mr-5 '>Search Recipie</li></Link>
 
         <Link to='/SavedCardsPage' >
           <li>
