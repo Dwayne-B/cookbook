@@ -2,8 +2,9 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 import express from "express";
 import mongoose from "mongoose";
-import fetch from "node-fetch";
+import getEdamam from './middleware/GetEdamam.js';
 import apiRouter from "./routes/api.js";
+import edamamRouter from './routes/edamamApi.js';
 if (process.env.NODE_ENV !== "prod") {
   dotenv.config();
 }
@@ -49,73 +50,8 @@ app.use(function (req, res, next) {
  */
 
 
-app.post('/edamamApi', async (req, res, next) => {
-
-  // console.log(req.body);
-  const app_id = "2f7f65d7";
-  const app_key = "06c0d1436fd1ffbf3cfc3ebda9042f5a";
-
-  const options2 = {
-    method: 'GET',
-    headers: {
-      "Content-Type": "application/json",
-      "Accept-Encoding": "gzip",
-      "app_id": `${app_id}`
-    }
-    , gzip: true,
-    compress: true,
-    agent: null,
-  }
-
-  var url2 = `https://api.edamam.com/api/recipes/v2/?type=public&q=${req.body.query}&app_id=${app_id}&app_key=${app_key}`;
-  // console.log(url2);
-
-
-  const data = await fetch(url2, options2)
-    .then(res => res.json())
-    .then(json => {
-
-      // console.log('POST', json.hits, "endPOST", json)
-
-      res.json(json.hits);
-    })
-    .catch(err => console.error('error:' + err));
-
-
-})
-app.use('/', async (req, res, next) => {
-
-  // console.log("edamam");
-  const app_id = "2f7f65d7";
-  const app_key = "06c0d1436fd1ffbf3cfc3ebda9042f5a";
-
-  const options2 = {
-    method: 'GET',
-    headers: {
-      "Content-Type": "application/json",
-      "Accept-Encoding": "gzip",
-      "app_id": `${app_id}`
-    }
-    , gzip: true,
-    compress: true,
-    agent: null,
-  }
-
-  var url2 = `https://api.edamam.com/api/recipes/v2/?type=public&q=pasta&app_id=${app_id}&app_key=${app_key}`;
-
-
-  const data = await fetch(url2, options2)
-    .then(res => res.json())
-    .then(json => {
-      res.locals.data = json.hits
-      console.log(json.hits.length)
-
-      next();
-    })
-    .catch(err => console.error('error:' + err));
-
-
-})
+app.use('/edamamApi', edamamRouter);
+app.use('/', getEdamam)
 /** 
  * all users can interact with CRUD API
  * this piece of middleware on this specific route allows access to CRUD operations.

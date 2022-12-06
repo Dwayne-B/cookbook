@@ -37,7 +37,9 @@ const getAllCards = async (req, res, next) => {
 const createCard = async (req, res, next) => {
   console.log(req.body)
   const newRecipe = new Recipe({
-    title: req.body.title
+    label: req.body.label,
+    cusineType: req.body.cusineType,
+    ingredients: req.body.ingredients
   });
   await newRecipe.save().then(data => { console.log(data); res.json(data); }).catch(err => next(err + "  cannot create cards error"))
 
@@ -59,9 +61,13 @@ const updateCard = async (req, res, next) => {
 
   // get recipe card id
   const recipeId = req.params.id;
-  console.log(recipeId, req.body.title);
+
   //find recipe with that id in DB
-  const recipe = await Recipe.findByIdAndUpdate({ _id: recipeId }, { title: req.body.title });
+  const recipe = await Recipe.findByIdAndUpdate({ _id: recipeId }, {
+    label: req.body.label,
+    cusineType: req.body.cusineType,
+    ingredients: req.body.ingredients
+  });
   // send the deleted recipe back 
   res.json(recipe);
 }

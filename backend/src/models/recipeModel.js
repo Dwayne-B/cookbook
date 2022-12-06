@@ -3,10 +3,14 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const recipeSchema = new Schema({
-  title: {
+  label: {
     type: String,
     required: true
-  }
+  },
+  cusineType: String,
+  ingredients: [{
+    type: String
+  }]
 
 });
 
