@@ -1,9 +1,9 @@
 
 import { useEffect, useState } from 'react';
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Nav from './components/elements/NavLinks';
 import HomePage from "./components/pages/HomePage";
+import NotFound from './components/pages/NotFound';
 import SavedCardsPage from "./components/pages/SavedCardsPage";
 import "./css/main.css";
 function App() {

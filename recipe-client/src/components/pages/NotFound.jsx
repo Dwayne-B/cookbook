@@ -3,7 +3,7 @@ import Navigation from '../sections/Navigation'
 function NotFound() {
   return (
 
-    <div>PAGE NotFound</div>
+    <div className='h-screen flex justify-center items-center'><p>PAGE NotFound</p></div>
   )
 }
 
