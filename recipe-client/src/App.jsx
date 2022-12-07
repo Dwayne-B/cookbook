@@ -41,6 +41,7 @@ function App() {
           <Route index exact path='/' element={<HomePage recipes={recipes} setRecipe={setRecipe} setData={setData} x={x} />} />
           <Route exact path="SavedCardsPage"
             element={<SavedCardsPage x={x} setData={setData} />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
 
 
