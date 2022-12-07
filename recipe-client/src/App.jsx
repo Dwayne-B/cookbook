@@ -8,7 +8,7 @@ import SavedCardsPage from "./components/pages/SavedCardsPage";
 import "./css/main.css";
 function App() {
   const [currentPage, setCurPage] = useState('home');
-  const url = "http://localhost:5000/api  ";
+  const url = "https://recipe-node-project.herokuapp.com/api  ";
   const [recipes, setRecipe] = useState();
   console.log(currentPage)
   const [x, setData] = useState();

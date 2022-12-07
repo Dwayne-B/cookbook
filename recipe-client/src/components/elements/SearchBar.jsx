@@ -8,7 +8,7 @@ function SearchBar({ setRecipe }) {
   const fetchRecipies = async (e) => {
     console.log(searchQuery)
     e.preventDefault();
-    await fetch("http://localhost:5000/edamamApi", {
+    await fetch("https://recipe-node-project.herokuapp.com/edamamApi", {
       method: "POST",
       body: JSON.stringify({ query: searchQuery }),
       headers: {

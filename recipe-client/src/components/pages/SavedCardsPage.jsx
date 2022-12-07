@@ -49,7 +49,7 @@ function SavedCardsPage({ x, setData, }) {
     currentCard === e.target.id && setCurrentCard(null);
     console.log(e.target.innerHTML)
 
-    if (e.target.innerHTML === "edit") {
+    if (e.target.innerHTML === "Edit") {
       setCurrentCard(e.target.id);
       setEditState(true);
       setShow(false);
@@ -65,14 +65,13 @@ function SavedCardsPage({ x, setData, }) {
       });
 
 
-    } else if (e.target.innerHTML === "submit") {
+    } else if (e.target.innerHTML === "Submit") {
       setEditState(false);
       setShow(false);
 
-      console.log("fetch", editState);
-      console.log("fetch", update);
 
-      fetch(`http://localhost:5000/api/updateCard/${e.target.id}`, {
+
+      fetch(`https://recipe-node-project.herokuapp.com/api/updateCard/${e.target.id}`, {
         method: "PATCH",
         body: JSON.stringify({
           label: update.label,
@@ -101,7 +100,7 @@ function SavedCardsPage({ x, setData, }) {
 
     } else if (e.target.innerHTML === "Delete") {
       // delete
-      fetch(`http://localhost:5000/api/deleteCard/${e.target.id}`, {
+      fetch(`https://recipe-node-project.herokuapp.com/api/deleteCard/${e.target.id}`, {
         method: 'DELETE',
       }).then((res) => { res.json() }).then((data) => {
 
@@ -123,7 +122,7 @@ function SavedCardsPage({ x, setData, }) {
         {x ? x.map((recipe, i) => {
 
           return (
-            <div className={` bg-white min-w-[191.391px] max-w-[30%] text-black  mb-5 mr-5 flex  flex-col w-1/2  justify-between${currentCard === recipe._id && show ? "bg-red-500 h-fit " : "min-h-[225px] max-h-[250px]"
+            <div key={i} className={` bg-white min-w-[191.391px] max-w-[30%] text-black  mb-5 mr-5 flex  flex-col w-1/2  justify-between${currentCard === recipe._id && show ? "bg-red-500 h-fit " : "min-h-[225px] max-h-[250px]"
               }
         `} id={recipe._id} >
 
@@ -151,7 +150,7 @@ function SavedCardsPage({ x, setData, }) {
 
                       {recipe.ingredients.map((ing, i) => {
 
-                        return (<li>{ing}</li>)
+                        return (<li key={i}>{ing}</li>)
                       })}
 
                     </ul> : null

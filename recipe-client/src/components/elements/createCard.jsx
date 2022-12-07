@@ -45,7 +45,7 @@ function CreateCard({ x, setData }) {
   const create = async () => {
 
     if (input) {
-      await fetch(" http://localhost:5000/api/", {
+      await fetch(" https://recipe-node-project.herokuapp.com/api/", {
         method: "POST",
         body: JSON.stringify({
           label: input.label,

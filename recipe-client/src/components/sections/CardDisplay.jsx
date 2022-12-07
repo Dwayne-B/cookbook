@@ -9,7 +9,7 @@ function CardDisplay({ setRecipe, recipes, setData, x }) {
     console.log(recipe)
 
     if (recipe) {
-      await fetch(" http://localhost:5000/api/", {
+      await fetch(" https://recipe-node-project.herokuapp.com/api/", {
         method: "POST",
         body: JSON.stringify({
           label: recipe.label,
