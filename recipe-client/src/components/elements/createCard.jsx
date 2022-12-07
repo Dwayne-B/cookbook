@@ -3,23 +3,28 @@ import { useState } from 'react';
 function CreateCard({ x, setData }) {
   const [input, setInput] = useState({
 
-    label: "test",
-    cusineType: "placeholder",
-
+    label: "",
+    cusineType: "",
+    ingredients: []
 
   });
 
   const handleInput = (e) => {
     setInput((prevState) => {
       const property = e.target.name;
-      console.log(e.target.name);
+      if (property === "ingredients") {
+        let ing = e.target.value.split([","]);
+        prevState[property] = ing;
+        return { ...prevState };
+      } else {
+        prevState[property] = e.target.value;
+        console.log("other")
 
-      console.log("prev", prevState[property]);
 
-      prevState[property] = e.target.value;
-      console.log(prevState);
+        return { ...prevState };
+      }
 
-      return { ...prevState };
+
     })
 
 
@@ -27,18 +32,25 @@ function CreateCard({ x, setData }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // create();
-    setInput("");
+    create();
+    setInput(prevState => {
+      return {
+        label: "",
+        cusineType: "",
+        ingredients: [""]
+
+      }
+    });
   }
   const create = async () => {
 
-    if (testData) {
+    if (input) {
       await fetch(" http://localhost:5000/api/", {
         method: "POST",
         body: JSON.stringify({
-          label: testData.label,
-          cusineType: testData.cusineType,
-          ingredients: testData.ingredients
+          label: input.label,
+          cusineType: input.cusineType,
+          ingredients: input.ingredients
         }),
         headers: {
           "Content-Type": "application/json",
@@ -58,10 +70,10 @@ function CreateCard({ x, setData }) {
     <>
 
 
-      <form className="flex flex-col" method="post" required>
-        <input placeholder="name" value={input.label} onChange={handleInput} type='text' required name="label" id="" />
-        <input name="cusineType" value={input.cusineType} placeholder='type of cusine ' onChange={handleInput} />
-        <input name="ing" placeholder='ingredients' onChange={handleInput} />
+      <form className=" flex flex-col w-1/3" method="post" required>
+        <input className='p-2' placeholder="name" value={input.label} onChange={handleInput} type='text' required name="label" id="" />
+        <input className='p-2' name="cusineType" value={input.cusineType} placeholder='type of cusine ' onChange={handleInput} />
+        <input className='p-2' name="ingredients" placeholder='Ingredients seperate by commas' onChange={handleInput} value={input.ingredients} />
         <button className="bg-amber-400 " type="submit" onClick={handleSubmit}>Create New Recipie</button>
       </form>
     </>

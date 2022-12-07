@@ -1,19 +1,19 @@
 import { useRef, useState } from 'react';
-
+import { TiPlus } from "react-icons/ti";
 
 function CardDisplay({ setRecipe, recipes, setData, x }) {
   const [edamamQuery, setEdamamQuery] = useState('chicken')
   const [currentCard, setCurrentCard] = useState();
 
   const create = async (e, recipe) => {
-    console.log()
+    console.log(recipe)
 
     if (recipe) {
       await fetch(" http://localhost:5000/api/", {
         method: "POST",
         body: JSON.stringify({
           label: recipe.label,
-          cusineType: recipe.cusineType,
+          cusineType: recipe.cuisineType[0],
           ingredients: recipe.ingredientLines
         }),
         headers: {
@@ -48,7 +48,7 @@ function CardDisplay({ setRecipe, recipes, setData, x }) {
           <button onClick={(e) => {
             create(e, r.recipe)
           }} className="  absolute -top-[10px] -right-[10px]
-           w-14 rounded-full h-14 text-white bg-green-300  self-end ">+</button>
+           w-14 rounded-full h-14 text-white bg-green-300  text-2xl "><TiPlus className="m-auto" /></button>
           <img src={r.recipe.images.REGULAR.url} alt="" />
 
           <span className={`  p-4  `}>
@@ -66,7 +66,7 @@ function CardDisplay({ setRecipe, recipes, setData, x }) {
           <button id={i} onClick={(e) => {
             console.log(e.target.id)
             handleShow(e)
-          }} className="bg-blue-300 " >{currentCard === i.toString() ? "hide ing" : "show ing"}</button>
+          }} className="bg-blue-300 " >{currentCard === i.toString() ? "hide ingredients" : "Show ingredients"}</button>
         </div>)
       }) : "null"}
 

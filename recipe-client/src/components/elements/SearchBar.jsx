@@ -28,7 +28,7 @@ function SearchBar({ setRecipe }) {
     <div>
       <form >
         <input value={searchQuery} type="text" onChange={handleinpt} />
-        <button onClick={fetchRecipies} className="bg-amber-400 " type="submit">Search</button>
+        <button onClick={fetchRecipies} className=" px-2 bg-amber-400 " type="submit">Get Recipe</button>
       </form>
     </div>
   )
