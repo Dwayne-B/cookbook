@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+html {
+	box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;
+	font-size: 100%;
+}
+
+.App {
+	background-image: url('../assets/wood-bg.png');
+	background-position: center;
+	background-size: contain;
+
+	color: white;
+	height: 100%;
+	width: 100%;
+	font-family: Montserrat, sans-serif, Arial, Helvetica,
+		monospace;
+}
+/* nav */
+.logo {
+	height: 30%;
+	width: 30%;
+	object-fit: cover;
+	/* aspect-ratio: 1/1; */
+}
+
+/* hero */
+.cnt {
+	height: 20rem;
+	background-image: url('../assets/Strip-bg-hero.png');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+}
+.cnt:after {
+	position: absolute;
+	z-index: 0;
+	height: 100%;
+	width: 100%;
+	content: 'hello';
+	background-color: rgba(0, 0, 0, 0.319);
+}
+
+.cnt .searchBar {
+	width: 100%;
+	text-align: center;
+}
+.form input {
+	min-width: 65%;
+}
+.hamburger {
+	max-width: 31px;
+	margin-right: 20px;
+	cursor: pointer;
+}
+.hamburger_line {
+	height: 2px;
+	background-color: white;
+	width: 31px;
+	margin-bottom: 5px;
+}
