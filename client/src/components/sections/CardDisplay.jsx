@@ -44,17 +44,18 @@ function CardDisplay({ setRecipe, recipes, setData, x }) {
 	return (
 		<div
 			className=' flex
-      flex-wrap
-      justify-around
-      sm:flex-col
+      lg:flex-wrap
+      lg:justify-around
+      lg:flex-row
+      flex-col
     items-center mt-12 mx-auto'>
 			{recipes
 				? recipes.map((r, i) => {
 						return (
 							<div
 								className={`
-                  max-w-[383px]
-                  w-[383px]                 relative    bg-white   text-black  mb-5 flex  flex-col justify-between ${
+max-w-[383px]
+                  w-3/4  relative    bg-white   text-black  mb-5 flex  flex-col justify-between ${
 										currentCard === i.toString()
 											? 'h-fit'
 											: 'min-h-[425px] max-h-[fit]'

@@ -111,7 +111,12 @@ function SavedCardsPage({ x, setData }) {
 
 	return (
 		<div className=' flex flex-col items-center  mt-14 min-h-[100vh]'>
+			<h2 className='self-start mb-12'>
+				Create your own Recipe Card
+			</h2>
+
 			<CreateCard x={x} setData={setData} />
+			<h2 className='self-start mt-12'>Saved Recipes</h2>
 			<div className='px-4 mt-14 cardContainer flex flex-col sm:flex-row sm:flex-wrap  items-center sm:items-start max-w-[1100px] m-auto  '>
 				{x ? (
 					x.map((recipe, i) => {
