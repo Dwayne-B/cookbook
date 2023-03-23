@@ -7,7 +7,6 @@ html {
 	box-sizing: border-box;
 	margin: 0px;
 	padding: 0px;
-	font-size: 100%;
 }
 
 .App {
@@ -20,6 +19,9 @@ html {
 	width: 100%;
 	font-family: Montserrat, sans-serif, Arial, Helvetica,
 		monospace;
+}
+input {
+	color: black;
 }
 /* nav */
 .logo {
@@ -48,7 +50,7 @@ html {
 }
 
 .cnt .searchBar {
-	width: 100%;
+	/* width: 100%; */
 	text-align: center;
 }
 .form input {

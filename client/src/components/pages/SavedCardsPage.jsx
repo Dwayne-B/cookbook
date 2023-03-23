@@ -1,8 +1,10 @@
-import { useState } from 'react';
-// import { json } from 'react-router-dom';
-import CreateCard from '../elements/createCard';
+import { useContext, useState } from 'react';
 
-function SavedCardsPage({ x, setData }) {
+import RecipeContext from '../../Context/RecipeContext';
+import CreateCard from '../elements/createCard';
+function SavedCardsPage() {
+	const { myRecipes, setMyRecipes } =
+		useContext(RecipeContext);
 	const [editState, setEditState] = useState(false);
 	const [show, setShow] = useState(false);
 	const [update, setUpdate] = useState({
@@ -59,9 +61,10 @@ function SavedCardsPage({ x, setData }) {
 			/*
        I am using patch instead of update because only one field is likely to be updated at a time.
 */
+			//https://recipe-node-project.herokuapp.com/api/updateCard/${e.target.id}
 
 			fetch(
-				`https://recipe-node-project.herokuapp.com/api/updateCard/${e.target.id}`,
+				`http://localhost:5000/api/updateCard/${e.target.id}`,
 				{
 					method: 'PATCH',
 					body: JSON.stringify({
@@ -76,8 +79,8 @@ function SavedCardsPage({ x, setData }) {
 			)
 				.then((res) => res.json())
 				.then((data) => {
-					setData(
-						x.map((recipe, i) => {
+					setMyRecipes(
+						myRecipes.map((recipe, i) => {
 							if (recipe._id === e.target.id) {
 								console.log('to change', recipe);
 								recipe.label = update.label;
@@ -90,8 +93,9 @@ function SavedCardsPage({ x, setData }) {
 				});
 		} else if (e.target.innerHTML === 'Delete') {
 			// delete
+			//	`https://recipe-node-project.herokuapp.com/api/deleteCard/${e.target.id}`
 			fetch(
-				`https://recipe-node-project.herokuapp.com/api/deleteCard/${e.target.id}`,
+				`http://localhost:5000/api/deleteCard/${e.target.id}`,
 				{
 					method: 'DELETE',
 				},
@@ -100,8 +104,8 @@ function SavedCardsPage({ x, setData }) {
 					res.json();
 				})
 				.then((data) => {
-					setData(
-						x.filter((recipe) => {
+					setMyRecipes(
+						myRecipes.filter((recipe) => {
 							return recipe._id != e.target.id;
 						}),
 					);
@@ -110,27 +114,31 @@ function SavedCardsPage({ x, setData }) {
 	};
 
 	return (
-		<div className=' flex flex-col items-center  mt-14 min-h-[100vh]'>
-			<h2 className='self-start mb-12'>
-				Create your own Recipe Card
+		<div className=' flex flex-col mt-14 '>
+			<h2 className='self-start mb-12 ml-5'>
+				Create your own Recipe
 			</h2>
 
-			<CreateCard x={x} setData={setData} />
-			<h2 className='self-start mt-12'>Saved Recipes</h2>
-			<div className='px-4 mt-14 cardContainer flex flex-col sm:flex-row sm:flex-wrap  items-center sm:items-start max-w-[1100px] m-auto  '>
-				{x ? (
-					x.map((recipe, i) => {
+			<CreateCard />
+
+			<h2 className='self-start my-12 ml-5'>
+				Saved Recipes
+			</h2>
+			<div className='flex lg:flex-wrap lg:flex-row flex-col items-center justify-center gap-7 '>
+				{myRecipes ? (
+					myRecipes.map((recipe, i) => {
 						return (
 							<div
 								key={i}
-								className={` bg-white min-w-[191.391px] max-w-[30%] text-black  mb-5 mr-5 flex  flex-col w-1/2  justify-between${
-									currentCard === recipe._id && show
-										? 'bg-red-500 h-fit '
-										: 'min-h-[225px] max-h-[250px]'
-								}
+								className={`max-w-[383px] lg:w-[30%] bg-white w-3/4 text-black  flex  flex-col
+						justify-between my-5 min-h-[200px] ${
+							currentCard === recipe._id && show
+								? '  h-fit '
+								: ' max-h-[200px]'
+						}
         `}
 								id={recipe._id}>
-								<span className={`p-4`} key={i}>
+								<span className={`p-4 `} key={i}>
 									{currentCard === recipe._id &&
 									editState === true ? (
 										<input
@@ -165,7 +173,7 @@ function SavedCardsPage({ x, setData }) {
 										<input
 											name='ingredients'
 											type='text'
-											placeholder='ingredients'
+											placeholder='seperate ingredients by commas'
 											className=' w-40 border flex justify-between'
 											value={update.ingredients}
 											onChange={handleUpdate}
@@ -178,39 +186,40 @@ function SavedCardsPage({ x, setData }) {
 										</ul>
 									) : null}
 								</span>
-								<button
-									id={recipe._id}
-									className='bg-blue-700'
-									type='submit'
-									onClick={(e) => {
-										handle(e, recipe);
-									}}>
-									{currentCard === recipe._id &&
-									editState === true
-										? 'Submit'
-										: 'Edit'}
-								</button>
-								<button
-									id={recipe._id}
-									className='bg-red-700'
-									type='submit'
-									onClick={(e) => {
-										handle(e);
-									}}>
-									Delete
-								</button>
+								<div className='flex flex-col'>
+									<button
+										id={recipe._id}
+										className='bg-blue-700'
+										type='submit'
+										onClick={(e) => {
+											handle(e, recipe);
+										}}>
+										{currentCard === recipe._id &&
+										editState === true
+											? 'Submit'
+											: 'Edit'}
+									</button>
+									<button
+										id={recipe._id}
+										className='bg-red-700'
+										type='submit'
+										onClick={(e) => {
+											handle(e);
+										}}>
+										Delete
+									</button>
 
-								<button
-									id={recipe._id}
-									onClick={(e) => {
-										console.log(e.target.id);
-										handleShow(e);
-									}}
-									className='bg-blue-300 '>
-									{currentCard === recipe._id && show
-										? 'Hide ingredients'
-										: 'Show ingredients'}
-								</button>
+									<button
+										id={recipe._id}
+										onClick={(e) => {
+											handleShow(e);
+										}}
+										className='bg-[#FFCE3E] '>
+										{currentCard === recipe._id && show
+											? 'Hide ingredients'
+											: 'Show ingredients'}
+									</button>
+								</div>
 							</div>
 						);
 					})

@@ -1,33 +1,37 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import RecipeContext from '../../Context/RecipeContext';
 
-function SearchBar({ setRecipe }) {
-	const [searchQuery, setSearchQuery] = useState();
+function SearchBar() {
+	const { setEdamamRecipes, url, edamamURL } =
+		useContext(RecipeContext);
+	const [searchQuery, setSearchQuery] = useState('');
 	const handleinpt = (e) => {
-		setSearchQuery(e.target.value);
+		setSearchQuery((prev) => {
+			return (prev = e.target.value);
+		});
 	};
 	const fetchRecipies = async (e) => {
 		console.log(searchQuery);
 		e.preventDefault();
-		await fetch(
-			'https://recipe-node-project.herokuapp.com/edamamApi',
-			{
-				method: 'POST',
-				body: JSON.stringify({ query: searchQuery }),
-				headers: {
-					'Content-Type': 'application/json',
-				},
+		await fetch(edamamURL, {
+			method: 'POST',
+			body: JSON.stringify({ query: searchQuery }),
+			headers: {
+				'Content-Type': 'application/json',
 			},
-		)
+		})
 			.then((res) => res.json())
 			.then((data) => {
 				console.log('FWETCH DATA', data);
-				setRecipe(data);
+				setEdamamRecipes((prev) => {
+					return (prev = data);
+				});
 				setSearchQuery('');
 			});
 	};
 	return (
-		<div className='z-10 searchBar'>
-			<form className='form'>
+		<div className='z-10 searchBar  '>
+			<form className='form  w-[25rem]  '>
 				<input
 					value={searchQuery}
 					type='text'

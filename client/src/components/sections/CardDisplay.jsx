@@ -1,31 +1,30 @@
-import { useRef, useState } from 'react';
+import { useContext, useState } from 'react';
 import { TiPlus } from 'react-icons/ti';
+import RecipeContext from '../../Context/RecipeContext';
+function CardDisplay() {
+	const { edamamRecipes, myRecipes, setMyRecipes, url } =
+		useContext(RecipeContext);
 
-function CardDisplay({ setRecipe, recipes, setData, x }) {
-	const [edamamQuery, setEdamamQuery] = useState('chicken');
 	const [currentCard, setCurrentCard] = useState();
 
 	const create = async (e, recipe) => {
 		console.log(recipe);
 
 		if (recipe) {
-			await fetch(
-				' https://recipe-node-project.herokuapp.com/api/',
-				{
-					method: 'POST',
-					body: JSON.stringify({
-						label: recipe.label,
-						cusineType: recipe.cuisineType[0],
-						ingredients: recipe.ingredientLines,
-					}),
-					headers: {
-						'Content-Type': 'application/json',
-					},
+			await fetch(url, {
+				method: 'POST',
+				body: JSON.stringify({
+					label: recipe.label,
+					cusineType: recipe.cuisineType[0],
+					ingredients: recipe.ingredientLines,
+				}),
+				headers: {
+					'Content-Type': 'application/json',
 				},
-			)
+			})
 				.then((res) => res.json())
 				.then((updatedata) => {
-					setData([...x, updatedata]);
+					setMyRecipes([...myRecipes, updatedata]);
 				});
 		} else {
 		}
@@ -44,13 +43,13 @@ function CardDisplay({ setRecipe, recipes, setData, x }) {
 	return (
 		<div
 			className=' flex
-      lg:flex-wrap
-      lg:justify-around
-      lg:flex-row
+      md:flex-wrap
+      md:justify-around
+      md:flex-row
       flex-col
     items-center mt-12 mx-auto'>
-			{recipes
-				? recipes.map((r, i) => {
+			{edamamRecipes
+				? edamamRecipes.map((r, i) => {
 						return (
 							<div
 								className={`
@@ -64,7 +63,7 @@ max-w-[383px]
 								key={i}>
 								<button
 									onClick={(e) => {
-										e, r.recipe;
+										create(e, r.recipe);
 									}}
 									className='  absolute -top-[10px] -right-[10px]
            w-14 rounded-full h-14 text-white bg-[#FFCE3E]  text-2xl '>

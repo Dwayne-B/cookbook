@@ -1,6 +1,8 @@
-import { useState } from 'react';
-
-function CreateCard({ x, setData }) {
+import { useContext, useState } from 'react';
+import RecipeContext from '../../Context/RecipeContext';
+function CreateCard() {
+	const { myRecipes, setMyRecipes, url } =
+		useContext(RecipeContext);
 	const [input, setInput] = useState({
 		label: '',
 		cusineType: '',
@@ -36,24 +38,21 @@ function CreateCard({ x, setData }) {
 	};
 	const create = async () => {
 		if (input) {
-			await fetch(
-				' https://recipe-node-project.herokuapp.com/api/',
-				{
-					method: 'POST',
-					body: JSON.stringify({
-						label: input.label,
-						cusineType: input.cusineType,
-						ingredients: input.ingredients,
-					}),
-					headers: {
-						'Content-Type': 'application/json',
-					},
+			await fetch(url, {
+				method: 'POST',
+				body: JSON.stringify({
+					label: input.label,
+					cusineType: input.cusineType,
+					ingredients: input.ingredients,
+				}),
+				headers: {
+					'Content-Type': 'application/json',
 				},
-			)
+			})
 				.then((res) => res.json())
 				.then((updatedata) => {
 					console.log(updatedata);
-					setData([...x, updatedata]);
+					setMyRecipes([...myRecipes, updatedata]);
 				});
 		} else {
 		}
@@ -61,10 +60,11 @@ function CreateCard({ x, setData }) {
 	return (
 		<>
 			<form
-				className=' flex flex-col w-1/3'
+				className='max-w-[383px] self-center flex flex-col w-3/4'
 				method='post'
 				required>
 				<input
+					autoComplete='off'
 					className='p-2'
 					placeholder='name'
 					value={input.label}
@@ -75,6 +75,7 @@ function CreateCard({ x, setData }) {
 					id=''
 				/>
 				<input
+					autoComplete='off'
 					className='p-2'
 					name='cusineType'
 					value={input.cusineType}
@@ -82,14 +83,15 @@ function CreateCard({ x, setData }) {
 					onChange={handleInput}
 				/>
 				<input
+					autoComplete='off'
 					className='p-2'
 					name='ingredients'
-					placeholder='Ingredients seperate by commas'
+					placeholder='seperate ingredients by commas'
 					onChange={handleInput}
 					value={input.ingredients}
 				/>
 				<button
-					className='bg-amber-400 '
+					className='bg-amber-400'
 					type='submit'
 					onClick={handleSubmit}>
 					Create New Recipie
