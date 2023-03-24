@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { useContext, useState } from 'react';
 import RecipeContext from '../../Context/RecipeContext';
 
@@ -37,12 +38,15 @@ function SearchBar() {
 					type='text'
 					onChange={handleinpt}
 				/>
-				<button
+				<motion.button
+					whileHover={{
+						backgroundColor: '#6c5826',
+					}}
 					onClick={fetchRecipies}
 					className=' px-2 bg-amber-400 '
 					type='submit'>
 					Get Recipe
-				</button>
+				</motion.button>
 			</form>
 		</div>
 	);

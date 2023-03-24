@@ -1,5 +1,5 @@
+import { motion } from 'framer-motion';
 import { useContext, useState } from 'react';
-
 import RecipeContext from '../../Context/RecipeContext';
 import CreateCard from '../elements/createCard';
 function SavedCardsPage() {
@@ -61,10 +61,10 @@ function SavedCardsPage() {
 			/*
        I am using patch instead of update because only one field is likely to be updated at a time.
 */
-			//https://recipe-node-project.herokuapp.com/api/updateCard/${e.target.id}
-
+			// https://recipe-node-project.herokuapp.com/api/updateCard/${e.target.id}
+			// `http://localhost:5000/api/updateCard/${e.target.id}`;
 			fetch(
-				`http://localhost:5000/api/updateCard/${e.target.id}`,
+				`https://cookbook.herokuapp.com/api/updateCard/${e.target.id}`,
 				{
 					method: 'PATCH',
 					body: JSON.stringify({
@@ -93,9 +93,10 @@ function SavedCardsPage() {
 				});
 		} else if (e.target.innerHTML === 'Delete') {
 			// delete
-			//	`https://recipe-node-project.herokuapp.com/api/deleteCard/${e.target.id}`
-			fetch(
-				`http://localhost:5000/api/deleteCard/${e.target.id}`,
+			//	`https://cookbook.herokuapp.com/api/deleteCard/${e.target.id}`
+			// localhost:5000/api/deleteCard/${e.target.id}
+			http: fetch(
+				`https://cookbook.herokuapp.com/api/deleteCard/${e.target.id}`,
 				{
 					method: 'DELETE',
 				},
@@ -187,7 +188,11 @@ function SavedCardsPage() {
 									) : null}
 								</span>
 								<div className='flex flex-col'>
-									<button
+									<motion.button
+										whileHover={{
+											backgroundColor: '#1b2683',
+											color: '#fff',
+										}}
 										id={recipe._id}
 										className='bg-blue-700'
 										type='submit'
@@ -198,8 +203,12 @@ function SavedCardsPage() {
 										editState === true
 											? 'Submit'
 											: 'Edit'}
-									</button>
-									<button
+									</motion.button>
+									<motion.button
+										whileHover={{
+											backgroundColor: '#6c2626',
+											color: '#fff',
+										}}
 										id={recipe._id}
 										className='bg-red-700'
 										type='submit'
@@ -207,9 +216,13 @@ function SavedCardsPage() {
 											handle(e);
 										}}>
 										Delete
-									</button>
+									</motion.button>
 
-									<button
+									<motion.button
+										whileHover={{
+											backgroundColor: '#6c5826',
+											color: '#fff',
+										}}
 										id={recipe._id}
 										onClick={(e) => {
 											handleShow(e);
@@ -218,7 +231,7 @@ function SavedCardsPage() {
 										{currentCard === recipe._id && show
 											? 'Hide ingredients'
 											: 'Show ingredients'}
-									</button>
+									</motion.button>
 								</div>
 							</div>
 						);

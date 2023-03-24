@@ -1,4 +1,4 @@
-backend/src/node_modules/
-
+/backend/src/node_modules/
+/client
 
 /*/*/.env

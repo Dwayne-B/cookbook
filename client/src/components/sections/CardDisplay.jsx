@@ -1,7 +1,22 @@
+import { motion } from 'framer-motion';
 import { useContext, useState } from 'react';
 import { TiPlus } from 'react-icons/ti';
 import RecipeContext from '../../Context/RecipeContext';
 function CardDisplay() {
+	const [click, setClick] = useState(false);
+	const variants = {
+		click: {
+			rotate: 360,
+			transition: { duration: 0.4 },
+			scale: 1.25,
+		},
+		nothing: {
+			scale: 1,
+			transition: {
+				duration: 0.6,
+			},
+		},
+	};
 	const { edamamRecipes, myRecipes, setMyRecipes, url } =
 		useContext(RecipeContext);
 
@@ -25,6 +40,9 @@ function CardDisplay() {
 				.then((res) => res.json())
 				.then((updatedata) => {
 					setMyRecipes([...myRecipes, updatedata]);
+					setClick((prev) => {
+						return !prev;
+					});
 				});
 		} else {
 		}
@@ -61,14 +79,22 @@ max-w-[383px]
 									}
         `}
 								key={i}>
-								<button
+								<motion.button
+									whileHover={{
+										backgroundColor: '#6c5826',
+									}}
+									variants={variants}
+									animate={click ? 'click' : ''}
 									onClick={(e) => {
+										setClick((prev) => {
+											return !prev;
+										});
 										create(e, r.recipe);
 									}}
 									className='  absolute -top-[10px] -right-[10px]
            w-14 rounded-full h-14 text-white bg-[#FFCE3E]  text-2xl '>
 									<TiPlus className='m-auto' />
-								</button>
+								</motion.button>
 								<img
 									src={r.recipe.images.REGULAR.url}
 									alt=''
@@ -98,7 +124,11 @@ max-w-[383px]
 										</ul>
 									) : null}
 								</span>
-								<button
+								<motion.button
+									whileHover={{
+										backgroundColor: '#6c5826',
+										color: '#fff',
+									}}
 									id={i}
 									onClick={(e) => {
 										console.log(e.target.id);
@@ -108,7 +138,7 @@ max-w-[383px]
 									{currentCard === i.toString()
 										? 'hide ingredients'
 										: 'Show ingredients'}
-								</button>
+								</motion.button>
 							</div>
 						);
 				  })

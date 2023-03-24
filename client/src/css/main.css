@@ -25,10 +25,8 @@ input {
 }
 /* nav */
 .logo {
-	height: 30%;
-	width: 30%;
+	width: 50%;
 	object-fit: cover;
-	/* aspect-ratio: 1/1; */
 }
 
 /* hero */
