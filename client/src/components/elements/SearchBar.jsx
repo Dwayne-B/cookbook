@@ -15,10 +15,12 @@ function SearchBar() {
 		console.log(searchQuery);
 		e.preventDefault();
 		await fetch(edamamURL, {
+			mode: 'cors',
 			method: 'POST',
 			body: JSON.stringify({ query: searchQuery }),
 			headers: {
 				'Content-Type': 'application/json',
+				'Access-Control-Allow-Methods': ' POST',
 			},
 		})
 			.then((res) => res.json())

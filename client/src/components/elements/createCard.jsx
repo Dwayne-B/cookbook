@@ -36,9 +36,11 @@ function CreateCard() {
 			};
 		});
 	};
+
 	const create = async () => {
 		if (input) {
 			await fetch(url, {
+				mode: 'cors',
 				method: 'POST',
 				body: JSON.stringify({
 					label: input.label,
@@ -47,6 +49,7 @@ function CreateCard() {
 				}),
 				headers: {
 					'Content-Type': 'application/json',
+					'Access-Control-Allow-Methods': ' POST',
 				},
 			})
 				.then((res) => res.json())

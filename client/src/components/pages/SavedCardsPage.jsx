@@ -66,6 +66,7 @@ function SavedCardsPage() {
 			fetch(
 				`https://cookbook.herokuapp.com/api/updateCard/${e.target.id}`,
 				{
+					mode: 'cors',
 					method: 'PATCH',
 					body: JSON.stringify({
 						label: update.label,
@@ -74,6 +75,7 @@ function SavedCardsPage() {
 					}),
 					headers: {
 						'Content-Type': 'application/json',
+						'Access-Control-Allow-Methods': '*',
 					},
 				},
 			)
@@ -98,6 +100,7 @@ function SavedCardsPage() {
 			http: fetch(
 				`https://cookbook.herokuapp.com/api/deleteCard/${e.target.id}`,
 				{
+					mode: 'cors',
 					method: 'DELETE',
 				},
 			)
