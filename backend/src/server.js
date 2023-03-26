@@ -15,8 +15,8 @@ app.use(cors('*'));
 const password = process.env.PASS;
 const user = process.env.USER_NAME;
 
-const uri = `mongodb+srv://${user}:${password}@cluster0.ey7myir.mongodb.net/?retryWrites=true&w=majority`;
-// mongodb+srv://dbynum:<password>@cluster0.ey7myir.mongodb.net/?retryWrites=true&w=majority
+const uri = `mongodb+srv://${user}:${password}@cluster0.biuerlv.mongodb.net/?retryWrites=true&w=majority`;
+
 // conntect to DB
 
 const connectDB = async () => {
