@@ -10,6 +10,7 @@ if (process.env.NODE_ENV !== 'prod') {
 	dotenv.config();
 }
 // serverAPIversion specifies version of API being used
+//add rate limiting
 const PORT = process.env.PORT || 5231;
 const app = express();
 app.use(cors('*'));
