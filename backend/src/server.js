@@ -1,6 +1,7 @@
 import cors from 'cors';
 import * as dotenv from 'dotenv';
 import express from 'express';
+import rateLimit from 'express-rate-limit';
 import mongoose from 'mongoose';
 import getEdamam from './middleware/GetEdamam.js';
 import apiRouter from './routes/api.js';
@@ -16,6 +17,11 @@ const password = process.env.PASS;
 const user = process.env.USER_NAME;
 
 const uri = `mongodb+srv://${user}:${password}@cluster0.biuerlv.mongodb.net/?retryWrites=true&w=majority`;
+// rate limit for edamamApi
+const limiter = rateLimit({
+	windowMs: 1 * 60 * 1000, // 1 minute
+	max: 5, // maximum 100 requests per minute
+});
 
 // conntect to DB
 
@@ -48,8 +54,8 @@ app.use(function (req, res, next) {
  * get recipes from 3rd party API
  */
 
-app.use('/edamamApi', edamamRouter);
-app.use('/', getEdamam);
+app.use('/edamamApi', edamamRouter, limiter);
+app.use('/', getEdamam, limiter);
 /**
  * all users can interact with CRUD API
  * this piece of middleware on this specific route allows access to CRUD operations.
