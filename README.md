@@ -1,7 +1,10 @@
 # cookbook
 Cookbook is a full stack MERN application that allows users to search for recipes and perform CRUD operations on the saved recipes.Users can also create their own recipe cards.
+---
 ## Metrics
-	![website lighthouse metric](https://i.ibb.co/6ZksRPg/cookbook-metrics.png)
+![alt text](https://i.ibb.co/6ZksRPg/cookbook-metrics.png)
+- Largest Reason for the performance being 70 is unoptimized images that are not webp format
+---
 ## Technologies Used
 MongoDB, Express.js, React.js, Node.js
 ## Getting Started
