@@ -10,7 +10,7 @@ Instructions on how to clone the project from the repository.
 - cd into the project directory then run -> npm install
 - Instructions on how to run the project locally.
 - from the root dir run npm run dev
-Usage
+## Usage
 - users can search for recipes.
 - users can add (plus button) recipes to a list of saved and created recipes.
 - users can Create, Remove, Update, and Delete recipe cards.
