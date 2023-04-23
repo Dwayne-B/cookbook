@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { TiPlus } from 'react-icons/ti';
 import RecipeContext from '../../Context/RecipeContext';
 function CardDisplay() {
+	const addBtnRef = useRef(null);
+	const [addbtn, setAddBtn] = useState(null);
 	const [click, setClick] = useState(false);
 	const variants = {
 		click: {
@@ -80,15 +82,23 @@ max-w-[383px]
         `}
 								key={i}>
 								<motion.button
+									ref={addBtnRef}
 									whileHover={{
 										backgroundColor: '#6c5826',
 									}}
 									variants={variants}
-									animate={click ? 'click' : ''}
+									animate={
+										click && addbtn === i ? 'click' : ''
+									}
 									onClick={(e) => {
 										setClick((prev) => {
 											return !prev;
 										});
+										setAddBtn((prev) => {
+											return i;
+										});
+
+										console.log(addBtnRef.current);
 										create(e, r.recipe);
 									}}
 									className='  absolute -top-[10px] -right-[10px]

@@ -1,7 +1,6 @@
 import cors from 'cors';
 import * as dotenv from 'dotenv';
 import express from 'express';
-import rateLimit from 'express-rate-limit';
 import mongoose from 'mongoose';
 import getEdamam from './middleware/GetEdamam.js';
 import apiRouter from './routes/api.js';
