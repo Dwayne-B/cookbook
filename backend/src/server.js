@@ -20,7 +20,7 @@ const uri = `mongodb+srv://${user}:${password}@cluster0.biuerlv.mongodb.net/?ret
 // rate limit for edamamApi
 const limiter = rateLimit({
 	windowMs: 1 * 60 * 1000, // 1 minute
-	max: 5, // maximum 100 requests per minute
+	max: 4, // maximum 100 requests per minute
 });
 
 // conntect to DB

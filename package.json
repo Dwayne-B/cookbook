@@ -16,8 +16,5 @@
 	"bugs": {
 		"url": "https://github.com/Dwayne-B/recipe/issues"
 	},
-	"homepage": "https://github.com/Dwayne-B/recipe#readme",
-	"dependencies": {
-		"express-rate-limit": "^6.7.0"
-	}
+	"homepage": "https://github.com/Dwayne-B/recipe#readme"
 }
