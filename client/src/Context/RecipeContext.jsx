@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState ,useLayoutEffect} from 'react';
 
 // this is the equivalent to the createStore method of Redux
 // https://redux.js.org/api/createstore
@@ -11,7 +11,7 @@ export function RecipeProvider({ children }) {
 	// state
 	const [currentPage, setCurPage] = useState('home');
 	// const url = 'https://cookbook.herokuapp.com/api  ';
-	const url = 'http://localhost:5000/api ';
+	const url = 'http://localhost:5000/ ';
 	// const edamamURL ='https://cookbook.herokuapp.com/edamamApi';
 	const edamamURL = 'http://localhost:5000/edamamApi';
 	const [edamamRecipes, setEdamamRecipes] = useState();
@@ -21,16 +21,15 @@ export function RecipeProvider({ children }) {
 		console.log('get initial recipes use Effect');
 		try {
 			const getData = async () => {
-				const res = await fetch(url).then((data) =>
-					data.json(),
-				);
-				/*  take combined data and set state accordingly*/
-				if (!edamamRecipes && !myRecipes) {
-					setEdamamRecipes(res.recipeAPI);
-					setMyRecipes(res.savedCards);
-				} else {
-					return null;
-				}
+				const res = await fetch(url).then((data)=>{
+					
+						return data.json();
+				}).then((data) => {
+					console.log("final",data);
+				setEdamamRecipes(data.hits );
+					return;
+				})
+				// setMyRecipes(res.savedCards);
 			};
 
 			getData();

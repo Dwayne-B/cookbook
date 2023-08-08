@@ -10,16 +10,13 @@ html {
 }
 
 .App {
-	background-image: url('../assets/wood.png');
-	background-position: center;
-	/* background-size: cover; */
-background-repeat: no-repeat;
+
 	color: white;
 	min-height: 100%;
 	width: 100%;
 	font-family: Montserrat, sans-serif, Arial, Helvetica,
 		monospace;
-	
+	background-color: #333;
 		
 
 }

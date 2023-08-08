@@ -5,23 +5,18 @@ import mongoose from 'mongoose';
 import getEdamam from './middleware/GetEdamam.js';
 import apiRouter from './routes/api.js';
 import edamamRouter from './routes/edamamApi.js';
-if (process.env.NODE_ENV !== 'prod') {
-	dotenv.config();
-}
-// serverAPIversion specifies version of API being used
-//add rate limiting
-const PORT = process.env.PORT || 5231;
+// if (process.env.NODE_ENV !== 'prod') {
+// 	dotenv.config();
+// }
+dotenv.config();
+const PORT = process.env.PORT || 5000;
 const app = express();
 app.use(cors('*'));
-const password = process.env.PASS;
-const user = process.env.USER_NAME;
+const password = process.env.PASS || "IUskvJO89ZljXVX6";
+const user = process.env.USER_NAME || "dbynum";
 
 const uri = `mongodb+srv://${user}:${password}@cluster0.biuerlv.mongodb.net/?retryWrites=true&w=majority`;
-// rate limit for edamamApi
-const limiter = rateLimit({
-	windowMs: 1 * 60 * 1000, // 1 minute
-	max: 4, // maximum 100 requests per minute
-});
+
 
 // conntect to DB
 
@@ -43,6 +38,7 @@ const connectDB = async () => {
 app.use(express.json());
 // This allows Cross-Origin Requests to our server
 app.use(function (req, res, next) {
+
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header(
 		'Access-Control-Allow-Headers',
@@ -54,13 +50,14 @@ app.use(function (req, res, next) {
  * get recipes from 3rd party API
  */
 
-app.use('/edamamApi', edamamRouter, limiter);
-app.use('/', getEdamam, limiter);
+app.use('/', getEdamam);
+// app.use('/edamamApi', edamamRouter);
+
 /**
  * all users can interact with CRUD API
  * this piece of middleware on this specific route allows access to CRUD operations.
  * */
-app.use('/api', apiRouter);
+// app.use('/api', apiRouter);
 
 /*
  **Add error handling middleware for API routes and non api routes
@@ -74,5 +71,5 @@ app.use((req, res, next) => {
 	next();
 }, errorHandler);
 
-// function calls
+// init function call
 connectDB();

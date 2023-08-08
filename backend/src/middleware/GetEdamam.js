@@ -1,5 +1,5 @@
-import fetch from "node-fetch";
-
+import axios from 'axios'
+import * as dotenv from 'dotenv';
 const getEdamam = async (req, res, next) => {
 
   // console.log("edamam");
@@ -20,13 +20,12 @@ const getEdamam = async (req, res, next) => {
   var url2 = `https://api.edamam.com/api/recipes/v2/?type=public&q=pasta&app_id=${process.env.APP_ID}&app_key=${process.env.APP_KEY}`;
 
 
-  const data = await fetch(url2, options2)
-    .then(res => res.json())
+  const data = await axios(url2, options2)
     .then(json => {
-      res.locals.data = json.hits
-      console.log(json.hits.length)
+      // res.locals.data = json.hits
+      console.log(json.data)
 
-      next();
+      res.json(json.data);
     })
     .catch(err => console.error('error:' + err));
 
