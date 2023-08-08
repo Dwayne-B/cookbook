@@ -5,7 +5,7 @@ import RecipeContext from '../../Context/RecipeContext';
 function CardDisplay() {
 
 	const {edamamRecipes} = useContext(RecipeContext); 
-	// const cardData =[
+
 	// 	{
 	// 	  "postId": 1,
 	// 	  "id": 1,
@@ -3508,7 +3508,7 @@ function CardDisplay() {
 	// 	}
 	//   ];
 	const addBtnRef = useRef(null);
-	console.log('TEST',edamamRecipes)
+	
 	const [addbtn, setAddBtn] = useState(null);
 	const [click, setClick] = useState(false);
 	const variants = {
@@ -3545,7 +3545,7 @@ function CardDisplay() {
 		{
 			edamamRecipes?
 			edamamRecipes.map((card,i)=>{
-				return(<div className='bg-slate-400 max-w-[25rem] m-auto my-5 p-8'>
+				return(<div key={i}className='bg-slate-400 max-w-[25rem] m-auto my-5 p-8'>
 					<img src={card.recipe.image} alt="placeholder"  />
 					<small>{card.recipe.dishType}</small>
 					<p>{card.recipe.source}</p>
@@ -3562,7 +3562,7 @@ function CardDisplay() {
 
 			})
 			
-			:null
+			:<h1>LOADING RECIPES...</h1>
 		}
 	</div>
 	);

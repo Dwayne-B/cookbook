@@ -5,7 +5,7 @@ import RecipeContext from '../../Context/RecipeContext';
 function SearchBar() {
 	const { setEdamamRecipes, url, edamamURL } =
 		useContext(RecipeContext);
-	const [searchQuery, setSearchQuery] = useState('');
+	const [searchQuery, setSearchQuery] = useState('taco');
 	const handleinpt = (e) => {
 		setSearchQuery((prev) => {
 			return (prev = e.target.value);
@@ -20,15 +20,17 @@ function SearchBar() {
 			body: JSON.stringify({ query: searchQuery }),
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Methods': ' POST',
+				'Access-Control-Allow-Methods': 'POST',
 			},
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log('FWETCH DATA', data);
-				setEdamamRecipes((prev) => {
-					return (prev = data);
-				});
+				console.log('Fetched DATA', data);
+				// setEdamamRecipes((prev) => {
+				// 	prev = data
+				// 	return data;
+				// });
+				setEdamamRecipes(data.hits);
 				setSearchQuery('');
 			});
 	};

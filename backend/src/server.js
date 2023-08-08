@@ -50,8 +50,9 @@ app.use(function (req, res, next) {
  * get recipes from 3rd party API
  */
 
+app.use('/edamamApi', edamamRouter);
 app.use('/', getEdamam);
-// app.use('/edamamApi', edamamRouter);
+
 
 /**
  * all users can interact with CRUD API

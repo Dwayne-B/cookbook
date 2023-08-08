@@ -14,7 +14,7 @@ export function RecipeProvider({ children }) {
 	const url = 'http://localhost:5000/ ';
 	// const edamamURL ='https://cookbook.herokuapp.com/edamamApi';
 	const edamamURL = 'http://localhost:5000/edamamApi';
-	const [edamamRecipes, setEdamamRecipes] = useState();
+	const [edamamRecipes, setEdamamRecipes] = useState(null);
 	const [myRecipes, setMyRecipes] = useState();
 	// get Initial recipes from API and DB
 	useEffect(() => {
@@ -25,7 +25,7 @@ export function RecipeProvider({ children }) {
 					
 						return data.json();
 				}).then((data) => {
-					console.log("final",data);
+					
 				setEdamamRecipes(data.hits );
 					return;
 				})

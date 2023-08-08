@@ -1,10 +1,7 @@
 
-
+import axios from 'axios'
 const searchEdemam = async (req, res, next) => {
-
-  // console.log(req.body);
-
-
+  console.log("REQ", req.body);
   const options2 = {
     method: 'GET',
     headers: {
@@ -12,25 +9,24 @@ const searchEdemam = async (req, res, next) => {
       "Accept-Encoding": "gzip",
       "app_id": `${process.env.APP_ID}`
     }
-    , gzip: true,
+    , 
+    gzip: true,
     compress: true,
     agent: null,
   }
 
   var url2 = `https://api.edamam.com/api/recipes/v2/?type=public&q=${req.body.query}&app_id=${process.env.APP_ID}&app_key=${process.env.APP_KEY}`;
-  // console.log(url2);
-
-
-  const data = await fetch(url2, options2)
-    .then(res => res.json())
+  const data = await axios(url2, options2)
     .then(json => {
 
-      // console.log('POST', json.hits, "endPOST", json)
-
-      res.json(json.hits);
+ console.log("recipe",json.data.hits)
+      res.json(json.data);
     })
-    .catch(err => console.error('error:' + err));
-
+    .catch(err => {
+      console.error('error:' + err)
+      next();
+    });
+   
 
 }
 

@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"dev": "concurrently \" cd backend/src && npm run start\"  \" cd client && npm run dev\""
+		"dev": "concurrently \" cd backend/src && npm run dev\"  \" cd client && npm run dev\""
 	},
 	"repository": {
 		"type": "git",
