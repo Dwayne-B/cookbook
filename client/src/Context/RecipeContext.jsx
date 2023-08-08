@@ -10,11 +10,10 @@ export default RecipeContext;
 export function RecipeProvider({ children }) {
 	// state
 	const [currentPage, setCurPage] = useState('home');
-	const url = 'https://cookbook.herokuapp.com/api  ';
-	// const url = 'http://localhost:5000/api ';
-	const edamamURL =
-		'https://cookbook.herokuapp.com/edamamApi';
-	// const edamamURL = 'http://localhost:5000/edamamApi';
+	// const url = 'https://cookbook.herokuapp.com/api  ';
+	const url = 'http://localhost:5000/api ';
+	// const edamamURL ='https://cookbook.herokuapp.com/edamamApi';
+	const edamamURL = 'http://localhost:5000/edamamApi';
 	const [edamamRecipes, setEdamamRecipes] = useState();
 	const [myRecipes, setMyRecipes] = useState();
 	// get Initial recipes from API and DB
