@@ -1,6 +1,7 @@
 import axios from 'axios'
 import * as dotenv from 'dotenv';
 const getEdamam = async (req, res, next) => {
+console.log("RES LOCALS", res.locals.data);
 
   const options2 = {
     method: 'GET',

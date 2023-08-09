@@ -134,8 +134,8 @@ function SavedCardsPage() {
 						return (
 							<div
 								key={i}
-								className={`max-w-[383px] lg:w-[30%] bg-white w-3/4 text-black  flex  flex-col
-						justify-between my-5 min-h-[200px] ${
+								className={` lg:w-[30%]    flex  flex-col
+						justify-between min-h-[200px] m-auto bg-slate-600  min-w-[250px] max-w-[30%] my-5  px-5 pb-5  break-words rounded-xl ${
 							currentCard === recipe._id && show
 								? '  h-fit '
 								: ' max-h-[200px]'

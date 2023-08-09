@@ -1,7 +1,7 @@
 import {BsFillBookmarkPlusFill} from 'react-icons/Bs'
 import './Card.css'
 import {useState} from 'react'
-
+import {motion} from 'framer-motion'
 function Card({card}) {
    
 
@@ -28,7 +28,11 @@ return(
 
 </a> */}
   
-    <button onClick={handleClick}className='py-2 px-3 bg-green-700 rounded-md'>{isFlipped?'flipping...':'Go to back'}</button>
+    <motion.button onClick={handleClick} whileHover={{
+											backgroundColor: '#1b2683',
+											color: '#fff',
+										}}
+                                        className='py-2 px-3 bg-blue-700 rounded-md text-white'>{isFlipped?'flipping...':'Go to back'}</motion.button>
 
     
 </div>
