@@ -18,6 +18,7 @@ const getOneCard = async (req, res, next) => {
 const getAllCards = async (req, res, next) => {
 	await Recipe.find()
 		.then((data) => {
+			console.log(res.locals.data)
 			const combinedResponse = {
 				savedCards: data,
 				recipeAPI: res.locals.data,

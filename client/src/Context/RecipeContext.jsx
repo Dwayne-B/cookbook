@@ -11,13 +11,16 @@ export function RecipeProvider({ children }) {
 	// state
 	const [currentPage, setCurPage] = useState('home');
 	// const url = 'https://cookbook.herokuapp.com/api  ';
-	const url = 'http://localhost:5000/ ';
+	const url = 'http://localhost:5000/api ';
 	// const edamamURL ='https://cookbook.herokuapp.com/edamamApi';
 	const edamamURL = 'http://localhost:5000/edamamApi';
-	const [edamamRecipes, setEdamamRecipes] = useState(null);
+	const [edamamRecipes, setEdamamRecipes] = useState();
 	const [myRecipes, setMyRecipes] = useState();
+
 	// get Initial recipes from API and DB
 	useEffect(() => {
+
+		
 		console.log('get initial recipes use Effect');
 		try {
 			const getData = async () => {
@@ -25,11 +28,12 @@ export function RecipeProvider({ children }) {
 					
 						return data.json();
 				}).then((data) => {
-					
-				setEdamamRecipes(data.hits );
+					console.log('DATA FROM SERVER', data)
+				setEdamamRecipes(data.recipeAPI.hits);
+				setMyRecipes(data.savedCards);
+
 					return;
 				})
-				// setMyRecipes(res.savedCards);
 			};
 
 			getData();

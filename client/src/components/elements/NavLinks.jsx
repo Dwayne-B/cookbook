@@ -12,7 +12,7 @@ function NavLinks() {
 		setIsMenuVisible((prevState) => !prevState);
 	}
 	return (
-		<div className=' sticky bg-[#333333] opacity-95 z-50 top-0 flex items-center justify-between'>
+		<div className=' sticky bg-[#333333] opacity-95 z-50 top-0 flex items-center justify-between px-5'>
 			<Link to='/'>
 				<img
 					className='logo  p-3   '
@@ -32,7 +32,7 @@ function NavLinks() {
 						opacity: 1,
 						transition: { duration: 0.4 },
 					}}
-					className='  menu absolute right-0 top-0 bg-[#333333] h-screen flex flex-col items-center w-1/2  pt-4'>
+					className=' px-5 menu absolute right-0 top-0 bg-[#333333] h-screen flex flex-col items-center w-1/2  pt-4'>
 					<Hamburger
 						pos={'open'}
 						isMenuVisible={isMenuVisible}

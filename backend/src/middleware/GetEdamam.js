@@ -20,12 +20,16 @@ const getEdamam = async (req, res, next) => {
   const data = await axios(url2, options2)
     .then(json => {
    
-      res.json(json.data);
+      // res.json(json.data);
+      res.locals.data = json.data
+      
+    next();
+
     })
     .catch(err => {
       console.error('error:' + err)
-      next();
     });
+
 
 }
 export default getEdamam

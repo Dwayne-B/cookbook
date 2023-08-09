@@ -2,12 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-*,
+*
+*::before,
+*::after
 html {
 	box-sizing: border-box;
 	margin: 0px;
 	padding: 0px;
 }
+
 
 .App {
 
@@ -64,4 +67,12 @@ input {
 	background-color: white;
 	width: 31px;
 	margin-bottom: 5px;
+}
+
+.plus{
+	position: absolute;
+	top: -5px;
+	right:-20px;
+	pointer-events:fill ;
+	cursor:pointer
 }

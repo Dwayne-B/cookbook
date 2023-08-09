@@ -51,14 +51,14 @@ app.use(function (req, res, next) {
  */
 
 app.use('/edamamApi', edamamRouter);
-app.use('/', getEdamam);
+app.use('/api', getEdamam);
 
 
 /**
  * all users can interact with CRUD API
  * this piece of middleware on this specific route allows access to CRUD operations.
  * */
-// app.use('/api', apiRouter);
+app.use('/api', apiRouter);
 
 /*
  **Add error handling middleware for API routes and non api routes
