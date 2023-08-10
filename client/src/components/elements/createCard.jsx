@@ -63,12 +63,12 @@ function CreateCard() {
 	return (
 		<>
 			<form
-				className='max-w-[383px] self-center flex flex-col w-3/4'
+				className='max-w-[383px] self-center flex flex-col w-3/4 '
 				method='post'
 				required>
 				<input
 					autoComplete='off'
-					className='p-2'
+					className='rounded-tr-lg rounded-tl-lg p-3'
 					placeholder='name'
 					value={input.label}
 					onChange={handleInput}
@@ -79,7 +79,7 @@ function CreateCard() {
 				/>
 				<input
 					autoComplete='off'
-					className='p-2'
+					className='p-3'
 					name='cusineType'
 					value={input.cusineType}
 					placeholder='type of cusine '
@@ -87,14 +87,14 @@ function CreateCard() {
 				/>
 				<input
 					autoComplete='off'
-					className='p-2'
+					className='p-3'
 					name='ingredients'
 					placeholder='seperate ingredients by commas'
 					onChange={handleInput}
 					value={input.ingredients}
 				/>
 				<button
-					className='bg-amber-400'
+					className='bg-amber-400 rounded-bl-lg rounded-br-lg p-3'
 					type='submit'
 					onClick={handleSubmit}>
 					Create New Recipie

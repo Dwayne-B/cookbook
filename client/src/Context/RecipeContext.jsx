@@ -21,7 +21,7 @@ export function RecipeProvider({ children }) {
 	useEffect(() => {
 
 		
-		console.log('get initial recipes use Effect');
+	
 		try {
 			const getData = async () => {
 				const res = await fetch(url).then((data)=>{

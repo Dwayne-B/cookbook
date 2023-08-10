@@ -1,32 +1,66 @@
 import {BsFillBookmarkPlusFill} from 'react-icons/Bs'
 import './Card.css'
-import {useState} from 'react'
+import {useState ,useContext} from 'react'
 import {motion} from 'framer-motion'
+import RecipeContext from '../../Context/RecipeContext';
+
 function Card({card}) {
    
-
-    console.log(card)
+const {setMyRecipes,myRecipes} = useContext(RecipeContext)
+    
     const [isFlipped, setIsFlipped] = useState(false)
 	const handleClick = ()=>{
         setIsFlipped(prev=>!prev);
     }
+    const handleSaveRecipe = (e)=>{
+        console.log("E>TARGET",card.recipe.label)
+        const create = async () => {
+            
+                await fetch(`http://localhost:5000/api/`, {
+                    mode: 'cors',
+                    method: 'POST',
+                    body: JSON.stringify({
+                        label: card.recipe.label,
+                        cusineType:card.recipe.cusineType,
+                        ingredients: card.recipe.ingredientLines,
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Methods': ' POST',
+                    },
+                })
+                    .then((res) => res.json())
+                    .then((updatedata) => {
+                        console.log(updatedata);
+                        setMyRecipes([...myRecipes, updatedata]);
+                    });
+         
+        };
+        create();
+    }
+
+    
 return(
     
   
 
 <div key="front" className='m-auto bg-slate-200  min-w-[250px] max-w-[30%] my-5 p-5 relative text-gray-900 break-words rounded-xl '>
-    <BsFillBookmarkPlusFill className='plus m-[0px]' size={60} color={' #FBBF24'}/>
+    <BsFillBookmarkPlusFill onClick={(e)=>{
+            handleSaveRecipe(e);
+    }} className='plus m-[0px]' size={60} color={' #FBBF24'}/>
     <img className='min-w-full rounded-lg ' src={card.recipe.images["REGULAR"].url} alt="placeholder"  />
     
-    <small>{card.recipe.dishType} : {card.recipe.cuisineType.map((type,i)=><>{type } </>)}</small>
+    <small>{card.recipe.dishType} : {card.recipe.cuisineType.map((type,i)=><span key={i}>{type } </span>)}</small>
+    <br />
+    <small> By:  <a href={card.recipe.url}>
+    {card.recipe.source}
+
+
+</a> </small>
 <h2>{card.recipe.label}</h2>
 <p> Feeds: {card.recipe.yield}</p>
 
-    {/* <a href={card.recipe.url}>
-    <p>{card.recipe.source}</p>
-
-
-</a> */}
+   
   
     <motion.button onClick={handleClick} whileHover={{
 											backgroundColor: '#1b2683',
@@ -38,9 +72,9 @@ return(
 </div>
 
 )
+                                    }
 
 
-}
 
 export default Card
 

@@ -29,6 +29,10 @@ const getAllCards = async (req, res, next) => {
 			next(err + 'Server error');
 		});
 };
+/**
+ * Saves a card to the DB
+ * route: /api/
+ * Returns all cards in DB and data from edamam api*/
 const createCard = async (req, res, next) => {
 	console.log(req.body);
 	const newRecipe = new Recipe({

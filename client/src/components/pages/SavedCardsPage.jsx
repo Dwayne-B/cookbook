@@ -64,7 +64,7 @@ function SavedCardsPage() {
 			// https://recipe-node-project.herokuapp.com/api/updateCard/${e.target.id}
 			// `http://localhost:5000/api/updateCard/${e.target.id}`;
 			fetch(
-				`https://cookbook.herokuapp.com/api/updateCard/${e.target.id}`,
+				`http://localhost:5000/api/updateCard/${e.target.id}`,
 				{
 					mode: 'cors',
 					method: 'PATCH',
@@ -97,8 +97,8 @@ function SavedCardsPage() {
 			// delete
 			//	`https://cookbook.herokuapp.com/api/deleteCard/${e.target.id}`
 			// localhost:5000/api/deleteCard/${e.target.id}
-			http: fetch(
-				`https://cookbook.herokuapp.com/api/deleteCard/${e.target.id}`,
+			 fetch(
+				`http://localhost:5000/api/deleteCard/${e.target.id}`,
 				{
 					mode: 'cors',
 					method: 'DELETE',
@@ -118,7 +118,7 @@ function SavedCardsPage() {
 	};
 
 	return (
-		<div className=' flex flex-col mt-14 '>
+		<div className=' flex flex-col mt-14 min-h-screen '>
 			<h2 className='self-start mb-12 ml-5'>
 				Create your own Recipe
 			</h2>
@@ -135,7 +135,7 @@ function SavedCardsPage() {
 							<div
 								key={i}
 								className={` lg:w-[30%]    flex  flex-col
-						justify-between min-h-[200px] m-auto bg-slate-600  min-w-[250px] max-w-[30%] my-5  px-5 pb-5  break-words rounded-xl ${
+						justify-between min-h-max max-h-fit m-auto bg-slate-600  min-w-[250px] max-w-[30%] my-5  px-5 pb-5  break-words rounded-xl ${
 							currentCard === recipe._id && show
 								? '  h-fit '
 								: ' max-h-[200px]'

@@ -39,7 +39,7 @@ function CardDisplay() {
 			? setCurrentCard(null)
 			: x(e);
 	};
-	console.log('TEST DATA',edamamRecipes)
+	
 	return (
 	<div className='p-12 flex flex-wrap gap-12 justify-center '>
 		
