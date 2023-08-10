@@ -8,7 +8,7 @@ function CreateCard() {
 		cusineType: '',
 		ingredients: [],
 	});
-
+	const [formError, setFormError] = useState(false);
 	const handleInput = (e) => {
 		setInput((prevState) => {
 			const property = e.target.name;
@@ -38,7 +38,7 @@ function CreateCard() {
 	};
 
 	const create = async () => {
-		if (input) {
+		if (input.cusineType != '' && input.label != "" && input.ingredients != '') {
 			await fetch(url, {
 				mode: 'cors',
 				method: 'POST',
@@ -58,10 +58,13 @@ function CreateCard() {
 					setMyRecipes([...myRecipes, updatedata]);
 				});
 		} else {
+			// set form error to true
+			setFormError(prev=>!prev)
 		}
 	};
 	return (
 		<>
+		{formError? <h3 className='font-bold text-red-700 text-center mb-3 '>All fields must be filled in. </h3>:null}
 			<form
 				className='max-w-[383px] self-center flex flex-col w-3/4 '
 				method='post'
@@ -84,6 +87,7 @@ function CreateCard() {
 					value={input.cusineType}
 					placeholder='type of cusine '
 					onChange={handleInput}
+					
 				/>
 				<input
 					autoComplete='off'
@@ -92,6 +96,7 @@ function CreateCard() {
 					placeholder='seperate ingredients by commas'
 					onChange={handleInput}
 					value={input.ingredients}
+					required
 				/>
 				<button
 					className='bg-amber-400 rounded-bl-lg rounded-br-lg p-3'

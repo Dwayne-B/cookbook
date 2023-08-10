@@ -240,7 +240,7 @@ function SavedCardsPage() {
 						);
 					})
 				) : (
-					<p>nothing yet</p>
+					<p>Loading your recipes</p>
 				)}
 			</div>
 		</div>
