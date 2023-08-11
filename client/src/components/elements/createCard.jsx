@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import RecipeContext from '../../Context/RecipeContext';
+import {motion} from 'framer-motion'
 function CreateCard() {
 	const { myRecipes, setMyRecipes, url } =
 		useContext(RecipeContext);
@@ -98,12 +99,16 @@ function CreateCard() {
 					value={input.ingredients}
 					required
 				/>
-				<button
+				<motion.button
+				whileHover={{
+					backgroundColor: '#6c5826',
+					color: '#fff',
+				}}
 					className='bg-amber-400 rounded-bl-lg rounded-br-lg p-3'
 					type='submit'
 					onClick={handleSubmit}>
 					Create New Recipie
-				</button>
+				</motion.button>
 			</form>
 		</>
 	);

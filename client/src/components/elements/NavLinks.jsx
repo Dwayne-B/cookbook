@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/CookBook.png';
-import img from '../../assets/Vector.svg';
+
 import Hamburger from './Hamburger';
 function NavLinks() {
 	const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -41,12 +41,12 @@ function NavLinks() {
 					<ul className='  px-4 py-2 flex flex-col justify-evenly items-center h-1/2'>
 						<Link to='/'>
 							{' '}
-							<li className=' '>Search Recipe</li>
+							<li className=' '>Search Recipes</li>
 						</Link>
 
 						<Link to='/SavedCardsPage'>
-							<li>
-								<img src={img} alt='' />
+							<li className='flex'>
+								 <p>Saved Recipes</p>
 							</li>
 						</Link>
 					</ul>

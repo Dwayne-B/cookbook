@@ -64,7 +64,8 @@ function SavedCardsPage() {
 			// https://recipe-node-project.herokuapp.com/api/updateCard/${e.target.id}
 			// `http://localhost:5000/api/updateCard/${e.target.id}`;
 			fetch(
-				`http://localhost:5000/api/updateCard/${e.target.id}`,
+				'https://recipes-btrc.onrender.com/api/updateCard/${e.target.id}'
+				,
 				{
 					mode: 'cors',
 					method: 'PATCH',
@@ -98,7 +99,7 @@ function SavedCardsPage() {
 			//	`https://cookbook.herokuapp.com/api/deleteCard/${e.target.id}`
 			// localhost:5000/api/deleteCard/${e.target.id}
 			 fetch(
-				`http://localhost:5000/api/deleteCard/${e.target.id}`,
+				`https://recipes-btrc.onrender.com/api/deleteCard/${e.target.id}`,
 				{
 					mode: 'cors',
 					method: 'DELETE',
@@ -135,7 +136,7 @@ function SavedCardsPage() {
 							<div
 								key={i}
 								className={` lg:w-[30%]    flex  flex-col
-						justify-between min-h-max max-h-fit m-auto bg-slate-600  min-w-[250px] max-w-[30%] my-5  px-5 pb-5  break-words rounded-xl ${
+						justify-between max-h-max m-auto bg-slate-600  min-w-[250px] max-w-[30%] my-5  p-5  break-words rounded-xl ${
 							currentCard === recipe._id && show
 								? '  h-fit '
 								: ' max-h-[200px]'
@@ -190,7 +191,7 @@ function SavedCardsPage() {
 										</ul>
 									) : null}
 								</span>
-								<div className='flex flex-col'>
+								<div className='flex flex-col '>
 									<motion.button
 										whileHover={{
 											backgroundColor: '#1b2683',

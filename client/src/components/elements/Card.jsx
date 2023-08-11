@@ -6,17 +6,20 @@ import RecipeContext from '../../Context/RecipeContext';
 
 function Card({card}) {
    
-const {setMyRecipes,myRecipes} = useContext(RecipeContext)
-    
-    const [isFlipped, setIsFlipped] = useState(false)
+const {setMyRecipes,myRecipes,url} = useContext(RecipeContext)
+const [isScaled, setIsScaled] = useState(false);
+
 	const handleClick = ()=>{
-        setIsFlipped(prev=>!prev);
+        setIsScaled(prevState => !prevState);
+        setTimeout(()=>{
+            setIsScaled(prevState => !prevState);
+        },400)
     }
     const handleSaveRecipe = (e)=>{
-        console.log("E>TARGET",card.recipe.label)
+      
         const create = async () => {
             
-                await fetch(`http://localhost:5000/api/`, {
+                await fetch(url, {
                     mode: 'cors',
                     method: 'POST',
                     body: JSON.stringify({
@@ -45,9 +48,18 @@ return(
   
 
 <div key="front" className='m-auto bg-slate-200  min-w-[250px] max-w-[30%] my-5 p-5 relative text-gray-900 break-words rounded-xl '>
-    <BsFillBookmarkPlusFill onClick={(e)=>{
+<motion.div className=' cnt-plus '
+  initial={{ scale: 1}} // Animation on tap/click
+  transition={{ duration: 0.5 }} // Animation duration
+  animate={{ scale: isScaled ? 1.5 : 1 }} // Animate scale based on state
+  onClick={handleClick}   // Click handler
+>
+
+<BsFillBookmarkPlusFill  onClick={(e)=>{
             handleSaveRecipe(e);
     }} className='plus m-[0px]' size={60} color={' #FBBF24'}/>
+
+</motion.div>
     <img className='min-w-full rounded-lg ' src={card.recipe.images["REGULAR"].url} alt="placeholder"  />
     
     <small>{card.recipe.dishType} : {card.recipe.cuisineType.map((type,i)=><span key={i}>{type } </span>)}</small>
@@ -66,7 +78,7 @@ return(
 											backgroundColor: '#1b2683',
 											color: '#fff',
 										}}
-                                        className='py-2 px-3 bg-blue-700 rounded-md text-white'>{isFlipped?'flipping...':'Go to back'}</motion.button>
+                                        className='py-2 px-3 bg-blue-700 rounded-md text-white'>{null?'flipping...':'Go to back'}</motion.button>
 
     
 </div>
