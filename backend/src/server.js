@@ -5,15 +5,15 @@ import mongoose from 'mongoose';
 import getEdamam from './middleware/GetEdamam.js';
 import apiRouter from './routes/api.js';
 import edamamRouter from './routes/edamamApi.js';
-// if (process.env.NODE_ENV !== 'prod') {
-// 	dotenv.config();
-// }
-dotenv.config();
-const PORT = process.env.PORT || 10000;
+if (process.env.NODE_ENV !== 'prod') {
+	dotenv.config();
+}
+
+const PORT = process.env.PORT || 5000;
 const app = express();
 app.use(cors('*'));
-const password = process.env.PASS || "IUskvJO89ZljXVX6";
-const user = process.env.USER_NAME || "dbynum";
+const password = process.env.PASS;
+const user = process.env.USER_NAME ;
 
 const uri = `mongodb+srv://${user}:${password}@cluster0.biuerlv.mongodb.net/?retryWrites=true&w=majority`;
 
