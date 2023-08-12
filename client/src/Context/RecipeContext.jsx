@@ -11,11 +11,11 @@ export function RecipeProvider({ children }) {
 	// state
 	const [currentPage, setCurPage] = useState('home');
 	// const url = 'https://cookbook.herokuapp.com/api  ';
-	// const url =  'https://recipes-btrc.onrender.com/api';
-	const url = 'http://localhost:10000/api ';
-	// const edamamURL = 'https://recipes-btrc.onrender.com/edamamApi';
+	const url =  'https://recipes-btrc.onrender.com/api';
+	// const url = 'http://localhost:10000/api ';
+	const edamamURL = 'https://recipes-btrc.onrender.com/edamamApi';
 	// const edamamURL ='https://cookbook.herokuapp.com/edamamApi';
-	const edamamURL = 'http://localhost:10000/edamamApi';
+	// const edamamURL = 'http://localhost:10000/edamamApi';
 	const [edamamRecipes, setEdamamRecipes] = useState();
 	const [myRecipes, setMyRecipes] = useState();
 
