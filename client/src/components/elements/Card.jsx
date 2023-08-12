@@ -7,9 +7,11 @@ import RecipeContext from '../../Context/RecipeContext';
 function Card({card}) {
    
 const {setMyRecipes,myRecipes,url} = useContext(RecipeContext)
+const [isFlipped, setIsFlipped] = useState(false)
 const [isScaled, setIsScaled] = useState(false);
 
 	const handleClick = ()=>{
+        
         setIsScaled(prevState => !prevState);
         setTimeout(()=>{
             setIsScaled(prevState => !prevState);
@@ -45,10 +47,9 @@ const [isScaled, setIsScaled] = useState(false);
     
 return(
     
-  
-
-<div key="front" className='m-auto bg-slate-200  min-w-[250px] max-w-[30%] my-5 p-5 relative text-gray-900 break-words rounded-xl '>
-<motion.div className=' cnt-plus '
+  <>
+  <div key="front" className={` m-auto bg-slate-200  min-w-[250px] max-w-[30%] my-5 p-5 relative text-gray-900 break-words rounded-xl`}>
+  <motion.div className=' cnt-plus z-10 '
   initial={{ scale: 1}} // Animation on tap/click
   transition={{ duration: 0.5 }} // Animation duration
   animate={{ scale: isScaled ? 1.5 : 1 }} // Animate scale based on state
@@ -59,12 +60,14 @@ return(
             handleSaveRecipe(e);
     }} className='plus m-[0px]' size={60} color={' #FBBF24'}/>
 
-</motion.div>
-    <img className='min-w-full rounded-lg ' src={card.recipe.images["REGULAR"].url} alt="placeholder"  />
+</motion.div >
+<div className={`${isFlipped?"front opacity-0":" back opacity-100"}`}>
+
+    <img className=' min-w-full rounded-lg ' src={card.recipe.images["REGULAR"].url} alt="placeholder"  />
     
     <small>{card.recipe.dishType} : {card.recipe.cuisineType.map((type,i)=><span key={i}>{type } </span>)}</small>
     <br />
-    <small> By:  <a href={card.recipe.url}>
+    <small> By:  <a className='underline' href={card.recipe.url}>
     {card.recipe.source}
 
 
@@ -74,14 +77,49 @@ return(
 
    
   
-    <motion.button onClick={handleClick} whileHover={{
+    <motion.button onClick={()=>{
+        setIsFlipped(prev=>!prev)
+    }} whileHover={{
 											backgroundColor: '#1b2683',
 											color: '#fff',
 										}}
                                         className='py-2 px-3 bg-blue-700 rounded-md text-white'>{null?'flipping...':'Go to back'}</motion.button>
 
-    
 </div>
+<div className={`${isFlipped?" front opacity-100":"opacity-0"} flex flex-col back absolute top-0 left-0  bg-slate-200    my-5 p-5  text-gray-900 break-words rounded-xl `} >
+<motion.div className=' cnt-plus '
+  initial={{ scale: 1}} // Animation on tap/click
+  transition={{ duration: 0.5 }} // Animation duration
+  animate={{ scale: isScaled ? 1.5 : 1 }} // Animate scale based on state
+  onClick={handleClick}   // Click handler
+>
+
+
+</motion.div >
+<h2>{card.recipe.label}</h2>
+
+    <small>{card.recipe.dishType} : {card.recipe.cuisineType.map((type,i)=><span key={i}>{type } </span>)}</small>
+    <br />
+    <p> By:  <a className='underline' href={card.recipe.url}>
+    {card.recipe.source}
+
+
+</a> </p>
+
+<p className='pb-3'> Steps: <br /> {card.recipe.ingredientLines}</p>
+<motion.button onClick={()=>{
+        setIsFlipped(prev=>!prev)
+    }} whileHover={{
+											backgroundColor: '#1b2683',
+											color: '#fff',
+										}}
+                                        className='py-2 px-3 bg-blue-700 rounded-md text-white'>{null?'flipping...':'Go to back'}</motion.button>
+
+</div>
+</div>
+  </>
+
+
 
 )
                                     }

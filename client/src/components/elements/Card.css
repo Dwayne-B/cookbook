@@ -1,0 +1,11 @@
+.front{
+    transform:perspective(600px)  rotateY(180deg);
+    transition: all;
+    transition-duration:.4s;
+}
+.back{
+    transform:perspective(600px)  rotateY(0deg);
+    transition: all;
+    transition-duration:1.2s;
+    
+}

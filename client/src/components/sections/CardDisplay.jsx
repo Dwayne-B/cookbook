@@ -41,7 +41,7 @@ function CardDisplay() {
 	};
 	
 	return (
-	<div className='p-12 flex flex-wrap gap-12 justify-center '>
+	<div className='p-12 flex flex-wrap gap-12 justify-center relative'>
 		
 		{
 			edamamRecipes?
