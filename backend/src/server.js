@@ -4,6 +4,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import getEdamam from './middleware/GetEdamam.js';
 import apiRouter from './routes/api.js';
+import Helmet from 'helmet'
 import edamamRouter from './routes/edamamApi.js';
 if (process.env.NODE_ENV !== 'prod') {
 	dotenv.config();
@@ -11,6 +12,7 @@ if (process.env.NODE_ENV !== 'prod') {
 
 const PORT = process.env.PORT || 5000;
 const app = express();
+app.use(helmet());
 app.use(cors('*'));
 const password = process.env.PASS;
 const user = process.env.USER_NAME ;
