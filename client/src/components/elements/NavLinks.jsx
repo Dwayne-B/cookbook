@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/CookBook.png';
-import img from '../../assets/Vector.svg';
+
 import Hamburger from './Hamburger';
 function NavLinks() {
 	const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -32,7 +32,7 @@ function NavLinks() {
 						opacity: 1,
 						transition: { duration: 0.4 },
 					}}
-					className=' px-5 menu absolute right-0 top-0 bg-[#333333] h-screen flex flex-col items-center w-1/2  pt-4'>
+					className=' px-5 menu absolute right-0 top-0 bg-[#333333] h-screen flex flex-col items-center w-1/2 max-w-[30%]  pt-4 shadow-2xl shadow-gray-800'>
 					<Hamburger
 						pos={'open'}
 						isMenuVisible={isMenuVisible}
@@ -46,7 +46,7 @@ function NavLinks() {
 
 						<Link to='/SavedCardsPage'>
 							<li>
-								<img src={img} alt='' />
+								My Recipes
 							</li>
 						</Link>
 					</ul>
