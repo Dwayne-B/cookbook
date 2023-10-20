@@ -18,10 +18,10 @@
 	},
 	"homepage": "https://github.com/Dwayne-B/recipe#readme",
 	"dependencies": {
-<<<<<<< HEAD
-		"helmet": "^7.0.0"
-=======
+
+		"helmet": "^7.0.0",
+
 		"node-cache": "^5.1.2"
->>>>>>> dev
+
 	}
 }
