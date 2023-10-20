@@ -41,7 +41,7 @@ function NavLinks() {
 					<ul className='  px-4 py-2 flex flex-col justify-evenly items-center h-1/2'>
 						<Link to='/'>
 							{' '}
-							<li className=' '>Search Recipes</li>
+							<li className='  text-center'>Search Recipes</li>
 						</Link>
 
 						<Link to='/SavedCardsPage'>
