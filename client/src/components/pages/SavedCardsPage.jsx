@@ -25,14 +25,13 @@ function SavedCardsPage() {
 		setUpdate((prevState) => {
 			const property = e.target.name;
 			if (property === 'ingredients') {
-				console.log('ing');
-
+		
 				let ing = e.target.value.split([',']);
 				prevState[property] = ing;
 				return { ...prevState };
 			} else {
 				prevState[property] = e.target.value;
-				console.log('label/cusine type');
+			
 				return { ...prevState };
 			}
 		});
@@ -64,7 +63,7 @@ function SavedCardsPage() {
 			// https://recipe-node-project.herokuapp.com/api/updateCard/${e.target.id}
 			// `http://localhost:5000/api/updateCard/${e.target.id}`;
 			fetch(
-				'https://recipes-btrc.onrender.com/api/updateCard/${e.target.id}'
+				`https://recipes-btrc.onrender.com/api/updateCard/${e.target.id}`
 				,
 				{
 					mode: 'cors',
@@ -139,7 +138,7 @@ function SavedCardsPage() {
 						justify-between max-h-max m-auto bg-slate-600  min-w-[250px] max-w-[30%] my-5  p-5  break-words rounded-xl ${
 							currentCard === recipe._id && show
 								? '  h-fit '
-								: ' max-h-[200px]'
+								: ' '
 						}
         `}
 								id={recipe._id}>
