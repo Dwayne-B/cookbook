@@ -54,7 +54,7 @@ app.use(function (req, res, next) {
  */
 
 app.use('/edamamApi', edamamRouter);
-app.use('/api',getEdamamCache, getEdamam);
+app.use('/api', getEdamam);
 
 
 /**
