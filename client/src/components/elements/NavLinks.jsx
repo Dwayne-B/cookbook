@@ -46,13 +46,11 @@ function NavLinks() {
 
 						<Link to='/SavedCardsPage'>
     <li className='flex'>
-        <p>Saved Recipes</p>
+        <p>My Recipes</p>
     </li>
 </Link>
 
-<Link to='/MyRecipesPage'>
-    <li>My Recipes</li>
-</Link>
+
 					</ul>
 				</motion.div>
 			) : null}
