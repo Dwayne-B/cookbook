@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
 import getEdamam from './middleware/GetEdamam.js';
+import {getEdamamCache} from './middleware/EdamamApiCache.js';
 import apiRouter from './routes/api.js';
 import Helmet from 'helmet'
 import edamamRouter from './routes/edamamApi.js';
@@ -53,7 +54,7 @@ app.use(function (req, res, next) {
  */
 
 app.use('/edamamApi', edamamRouter);
-app.use('/api', getEdamam);
+app.use('/api',getEdamamCache, getEdamam);
 
 
 /**

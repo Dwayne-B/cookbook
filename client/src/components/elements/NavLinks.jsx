@@ -32,7 +32,7 @@ function NavLinks() {
 						opacity: 1,
 						transition: { duration: 0.4 },
 					}}
-					className=' px-5 menu absolute right-0 top-0 bg-[#333333] h-screen flex flex-col items-center w-1/2  pt-4'>
+					className=' px-5 menu absolute right-0 top-0 bg-[#333333] h-screen flex flex-col items-center w-1/2 max-w-[30%]  pt-4 shadow-2xl shadow-gray-800'>
 					<Hamburger
 						pos={'open'}
 						isMenuVisible={isMenuVisible}
@@ -45,10 +45,14 @@ function NavLinks() {
 						</Link>
 
 						<Link to='/SavedCardsPage'>
-							<li className='flex'>
-								 <p>Saved Recipes</p>
-							</li>
-						</Link>
+    <li className='flex'>
+        <p>Saved Recipes</p>
+    </li>
+</Link>
+
+<Link to='/MyRecipesPage'>
+    <li>My Recipes</li>
+</Link>
 					</ul>
 				</motion.div>
 			) : null}
